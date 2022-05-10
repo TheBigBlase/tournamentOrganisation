@@ -1,7 +1,5 @@
 <?php 
-	session_start();
-
-	include('connexion_db.php');
+	include('Header.php');
 
     // Inscription
 
