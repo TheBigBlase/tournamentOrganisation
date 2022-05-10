@@ -4,13 +4,54 @@ include('connexion_db.php');
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
 }
+
+
+$sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
+$resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
+
+
+
 ?>
+
+<!-- signup/signin section -->
 
 <div>
     <a href="signinsignup.php">
         <span>Sign in / Sign up</span>
     </a>
 </div>
+
+<br>
+<!-- Tournament vue section -->
+<table>
+    <caption>Ongoing tournaments</caption>
+    <thead>
+    <tr>
+        <th>Tournament id</th>
+        <th>Tournament Name</th>
+        <th>End inscription date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
+        $competid = $row['competId'];
+        $competName = $row['competName'];
+        $endInscription = $row['endInscription'];
+        echo "<tr>";
+            echo "<th>" .  $competid  . "</th>";
+            echo "<th>" .  $competName  . "</th>";
+            echo "<th>" .  $endInscription  . "</th>";
+        echo "</tr>";
+    }
+    ?>
+    </tbody>
+</table>
+
+
+<br>
+<!-- Contact section -->
+
 <div>
     <h1>Contact</h1>
     <form method="POST">
