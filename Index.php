@@ -23,32 +23,32 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 
 <br>
 <!-- Tournament vue section -->
-<table>
-    <caption>Ongoing tournaments</caption>
-    <thead>
-    <tr>
-        <th>Tournament id</th>
-        <th>Tournament Name</th>
-        <th>End inscription date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
-        $competid = $row['competId'];
-        $competName = $row['competName'];
-        $endInscription = $row['endInscription'];
-        echo "<tr>";
-            echo "<th>" .  $competid  . "</th>";
-            echo "<th>" .  $competName  . "</th>";
-            echo "<th>" .  $endInscription  . "</th>";
-        echo "</tr>";
-    }
-    ?>
-    </tbody>
-</table>
-
-
+<div>
+    <table>
+        <caption>Ongoing tournaments</caption>
+        <thead>
+        <tr>
+            <th>Tournament id</th>
+            <th>Tournament Name</th>
+            <th>End inscription date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
+            $competid = $row['competId'];
+            $competName = $row['competName'];
+            $endInscription = $row['endInscription'];
+            echo "<tr>";
+                echo "<th>" .  $competid  . "</th>";
+                echo "<th>" .  $competName  . "</th>";
+                echo "<th>" .  $endInscription  . "</th>";
+            echo "</tr>";
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
 <br>
 <!-- Contact section -->
 
