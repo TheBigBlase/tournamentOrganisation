@@ -1,5 +1,5 @@
 <?php
-include('connexion_db.php');
+include('Header.php');
 
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
@@ -22,7 +22,7 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 </style>
 
 <div>
-    <a href="signinsignup.php">
+    <a href="signinup.php">
         <span>Sign in / Sign up</span>
     </a>
 </div>
@@ -58,7 +58,7 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 <!-- Contact section -->
 
 <div>
-    <h1>Contact</h1>
+    <h2>Contact</h2>
     <form method="POST">
     <label>
         Your name (Required) :
