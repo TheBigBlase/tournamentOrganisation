@@ -7,9 +7,7 @@ if(isset($_POST['user_pseudo']) && isset($_POST['user_mail']) && isset($_POST['u
 {
     $sql = "INSERT INTO user(pseudo, mail, mdp) VALUES(" . $_POST['user_pseudo'] . "," . $_POST['user_mail'] . "," . $_POST['user_mdp'] .")";
     echo $sql;
-
 }
-
 ?>
 
 <form action="signinup.php" method="post">

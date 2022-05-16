@@ -7,20 +7,25 @@ if(isset($_POST["nom_contact"])){
 
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
-$resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
+$resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 
 
 
 ?>
 
+
 <!-- signup/signin section -->
+<style>
+    td{
+        border: black 1px solid;
+    }
+</style>
 
 <div>
     <a href="signinsignup.php">
         <span>Sign in / Sign up</span>
     </a>
 </div>
-
 <br>
 <!-- Tournament vue section -->
 <div>
@@ -33,17 +38,17 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
             <th>End inscription date</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style=" ">
         <?php
         while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
             $competid = $row['competId'];
             $competName = $row['competName'];
             $endInscription = $row['endInscription'];
-            echo "<tr>";
-                echo "<th>" .  $competid  . "</th>";
-                echo "<th>" .  $competName  . "</th>";
-                echo "<th>" .  $endInscription  . "</th>";
-            echo "</tr>";
+            echo "<tr onmouseover='this.style.background=\"#0ff \"' onmouseout='this.style.background=\"#fff\"' onclick=\"location.href='tournamentVue.php?compet_id=$competid'\">";
+                echo "<td>".  $competid  . "</td>";
+                echo "<td>" .  $competName  . "</td>";
+                echo "<td>" .  $endInscription  . "</td>";
+            echo "</a></tr>";
         }
         ?>
         </tbody>
