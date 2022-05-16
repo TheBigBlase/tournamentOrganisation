@@ -20,7 +20,7 @@ if(isset($_POST['user_pseudo']) && $_POST['user_pseudo'] != '' && isset($_POST['
 if(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
 {
     $sql = "SELECT * FROM user WHERE mail = ? AND password = ?";
-    echo $sql;
+    //echo $sql;
     $req = $conn->prepare($sql);
     $req->bind_param("ss",$_POST['user_mail_c'], $_POST['user_mdp_c']);
     $req->execute();
@@ -36,6 +36,10 @@ if(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['
 
     $req->close();
     $conn->close();
+}
+
+if(isset($_GET['redirect'])){
+    header('Location: index.php?');
 }
 
 ?>
@@ -58,21 +62,21 @@ if(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['
     </div>
     <div>
         <label for="mdp">Mot de passe :</label>
-        <input id="mdp" name="user_mdp"></input>
+        <input id="mdp" name="user_mdp">
     </div>
 
     <input type="submit" value="Envoyer le formulaire">
 </form>
 
 <h2>Lacrimatica</h2>
-<form  method="post">
+<form  action="signinsignup.php?redirect=redirect" method="post">
     <div>
         <label for="mail">e-mail&nbsp;:</label>
         <input type="email" id="mail" name="user_mail_c">
     </div>
     <div>
         <label for="mdp">Mot de passe :</label>
-        <input id="mdp" name="user_mdp_c"></input>
+        <input id="mdp" name="user_mdp_c">
     </div>
 
     <input type="submit" value="Envoyer le formulaire">

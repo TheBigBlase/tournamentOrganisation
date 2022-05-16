@@ -1,15 +1,27 @@
 <?php
 include('connexion_db.php');
 
+if(session_status() === PHP_SESSION_NONE) session_start();
+
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
 }
+
+if(isset($_GET["out"])){
+    session_destroy();
+}else{
+    if(session_status() === PHP_SESSION_NONE) session_start();
+    //echo "Hello :" . $_SESSION['name'] . '<br>';
+    echo "Status" . session_status();
+}
+
+
+
 
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 ?>
-
 
 <!-- signup/signin section -->
 <style>
@@ -17,13 +29,27 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
         border: black 1px solid;
     }
 </style>
+<?php
+if(session_status() == PHP_SESSION_ACTIVE){
+    echo "
+        <div>
+            <a href='index.php?out=out'>
+                <span>Log out</span>
+            </a>
+        </div><br>
+        ";
+}else{
+    echo "
+        <div>
+            <a href='signinsignup.php'>
+                <span>Sign in / Sign up</span>
+            </a>
+        </div><br>
+        ";
+}
 
-<div>
-    <a href="signinsignup.php">
-        <span>Sign in / Sign up</span>
-    </a>
-</div>
-<br>
+
+?>
 <!-- creation tournment redirecte -->
 
 <div>
@@ -65,7 +91,6 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 </div>
 <br>
 <!-- Contact section -->
-
 <div>
     <h1>Contact</h1>
     <form method="POST">
