@@ -13,6 +13,8 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 
 ?>
 
+<a href="creationTournament.php">Créer un tournois !</a>
+
 <!-- signup/signin section -->
 
 <div>
