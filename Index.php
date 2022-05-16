@@ -8,9 +8,6 @@ if(isset($_POST["nom_contact"])){
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
-
-
-
 ?>
 
 
@@ -27,6 +24,18 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
     </a>
 </div>
 <br>
+<!-- creation tournment redirecte -->
+
+<div>
+    <a href="creationTournament.php"> Creation tournament </a>
+</div>
+
+<!-- inscription tournment redirecte -->
+
+<div>
+    <a href="inscrptionTournament.php"> Inscription tournament </a>
+</div>
+
 <!-- Tournament vue section -->
 <div>
     <table>
