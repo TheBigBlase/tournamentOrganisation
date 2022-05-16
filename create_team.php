@@ -1,9 +1,8 @@
 <section>
     <?php
-    session_start();
+    include('connexion_db.php');
 
-    $conn = @mysqli_connect("137.74.85.212", "tournamentOrganisation", "fucksql");
-    mysqli_select_db($conn, "tournamentOrg");
+    session_start();
 
     if(isset($_POST["createTeamForm"])){
         $ok = true;
