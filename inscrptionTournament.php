@@ -55,6 +55,7 @@ if(isset($_GET["competid"], $_GET["competName"])){
     if($teamName = $row['teamName'] == null){
         header('Location: inscrptionTournament.php?error_tournament=error_tournament');
     };
+    $teamName = $row['teamName'];
     $tournamentName = $_GET['competName'];
     $competid = $_GET['competid'];
     $teamId = $row['teamId'];
