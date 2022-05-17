@@ -1,6 +1,6 @@
 <section>
     <?php
-    include('connexion_db.php');
+    include('../database/connexion_db.php');
 
     session_start();
 

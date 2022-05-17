@@ -1,11 +1,12 @@
 <?php
 
-    include('config.php');
+		$a = include('config.php');
         /*Connexion à la base de données*/
 		$conn = @mysqli_connect($credentials["url"], $credentials["user"], $credentials["pass"]);
 
 		if (mysqli_connect_errno()) {
             $msg = "erreur ". mysqli_connect_error();
+						echo $msg;
         } else {  
             $msg = "connecté au serveur " . mysqli_get_host_info($conn);
             /*Sélection de la base de données*/
