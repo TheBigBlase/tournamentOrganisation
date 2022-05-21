@@ -60,7 +60,7 @@
     </div>
     <div>
         <label for="mail">e-mail&nbsp;:</label>
-        <input type="email" id="mail" name="user_maijust a burning l">
+        <input type="email" id="mail" name="user_mail">
     </div>
     <div>
         <label for="mdp">Mot de passe :</label>
