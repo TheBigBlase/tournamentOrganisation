@@ -1,5 +1,5 @@
 <?php
-include('connexion_db.php');
+include('../database/connexion_db.php');
 
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';

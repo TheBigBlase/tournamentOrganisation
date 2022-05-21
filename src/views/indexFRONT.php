@@ -1,5 +1,5 @@
 <?php
-include('connexion_db.php');
+include('../database/connexion_db.php');
 
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
@@ -9,7 +9,6 @@ if(isset($_GET["out"])){
     session_destroy();
 } else{
     if(session_status() === PHP_SESSION_NONE) session_start();
-    echo "Status" . session_status();
 }
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
@@ -39,7 +38,7 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
                     <li><a href="#">Contact</a></li>
                 </ul>
                 <div class="container">
-                    <button type="button">Sign In / Sign Up</button>
+                    <button type="button"  onclick="window.location.href='signinup.php';">Sign In / Sign Up</button>
                 </div>
                 <label for="toggle"><span class="bars"></span></label>
             </nav>
