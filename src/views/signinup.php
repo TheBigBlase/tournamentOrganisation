@@ -28,7 +28,6 @@
     elseif(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
     {
         $sql = "SELECT * FROM user WHERE mail = ? AND password = ?";
-        echo $sql;
         $req = $conn->prepare($sql);
         $req->bind_param("ss",$_POST['user_mail_c'], $_POST['user_mdp_c']);
         $req->execute();
@@ -37,13 +36,13 @@
         $data = $res->fetch_assoc();
         
         $_SESSION['ID'] = $data['userId'];
-        $_SESSION['name'] = $data['name'];
+        $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
 
-        echo $_SESSION['ID'];
         echo $_SESSION['name'];
 
         $req->close();
         $conn->close();
+				echo "<h3 color=green> Vous etes connecté. </h3>";
     }
 	
 ?>
