@@ -1,5 +1,5 @@
 <?php
-include('connexion_db.php');
+include('../database/connexion_db.php');
 
 if(session_status() === PHP_SESSION_NONE) session_start();
 
@@ -14,10 +14,6 @@ if(isset($_GET["out"])){
     //echo "Hello :" . $_SESSION['name'] . '<br>';
     echo "Status" . session_status();
 }
-
-
-
-
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
@@ -41,7 +37,7 @@ if(session_status() == PHP_SESSION_ACTIVE){
 }else{
     echo "
         <div>
-            <a href='signinsignup.php'>
+            <a href='signinup.php'>
                 <span>Sign in / Sign up</span>
             </a>
         </div><br>
@@ -93,7 +89,7 @@ if(session_status() == PHP_SESSION_ACTIVE){
 <!-- Contact section -->
 <div>
     <h1>Contact</h1>
-    <form method="POST">
+    <form action="index.php" method="POST">
     <label>
         Your name (Required) :
         <input type="text" name="nom_contact" required>

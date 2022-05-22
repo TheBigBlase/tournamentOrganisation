@@ -1,4 +1,4 @@
-<form method="post">
+<form action="creationTournament.php" method="post">
     <label>
 Le nom du tournois mdrrr (Required) :
         <input type="text" name="tournament_name" required>

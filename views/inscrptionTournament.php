@@ -1,14 +1,11 @@
 <?php
-include('connexion_db.php');
+include('../database/connexion_db.php');
 $sql = "SELECT * FROM `competition` WHERE CURRENT_DATE <= competition.endInscription;";
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
-if(session_status() === PHP_SESSION_NONE) session_start();
 
 echo session_status();
 ?>
-
-
 
 <a href="index.php">
     INDEX
@@ -22,7 +19,11 @@ echo session_status();
             <th>Tournament id</th>
             <th>Tournament Name</th>
             <th>End inscription date</th>
-            <th>Register</th>
+            <?php
+            if(isset($_SESSION['ID'])) {
+                echo "<th>Register</th>";
+            }
+            ?>
         </tr>
         </thead>
         <tbody style=" ">
@@ -35,7 +36,9 @@ echo session_status();
             echo "<td>".  $competid  . "</td>";
             echo "<td>" .  $competName  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
-            echo "<td><a href='inscrptionTournament.php?competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
+            if(isset($_SESSION['ID'])) {
+                echo "<td><a href='inscrptionTournament.php?competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
+            }
             echo "</a></tr>";
         }
         ?>
@@ -45,7 +48,9 @@ echo session_status();
 <br>
 
 <?php
-if(isset($_GET["competid"], $_GET["competName"])){
+if(!isset($_SESSION['ID'])){
+}
+if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $id =  $_SESSION['ID'];
     //echo   $_SESSION['name'];
 
@@ -76,39 +81,41 @@ if(isset($_GET["competid"], $_GET["competName"])){
     </div>
     ";
 }
-
-if(isset($_GET['compet_id'])){
-    session_start();
-    $id =  $_SESSION['ID'];
-    $sql = "SELECT * from team where teamId = (select teamId from user_team where userId = $id);";
-    $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
-    $row = mysqli_fetch_assoc($result);
-
-    $team_Id = $row['teamId'];
-    $compet_id = $_GET['compet_id'];
-
-    $sqm_verif = "SELECT * FROM `team_compet`";
-    $result_verif = mysqli_query($conn, $sqm_verif) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqm_verif);
-    while ($row_verif = mysqli_fetch_assoc($result_verif)) {
-        if($row_verif['teamId'] == $team_Id and $row_verif['competId'] == $compet_id ){
-            header('Location: inscrptionTournament.php?error=error');
-        }
-    }
-
-
-    $sqlInsert = "INSERT INTO `team_compet` (`teamId`, `competId`) VALUES ($team_Id, $compet_id );";
-    $result = mysqli_query($conn, $sqlInsert) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlInsert);
-
-    echo 'The form is send successfully, your team are now registered';
+if(!isset($_SESSION['ID'])) {
+    echo "If you want to access the register form you need to have an account !";
 }
 if(isset($_GET['error'])){
     echo 'Error, Your team is already registered';
-}
-if(isset($_GET['error_tournament'])){
-    echo "Error, Your don't have a team, you need to be in a team to register at this tournament !";
-}
+}else{
+    if(isset($_GET['compet_id'])){
+        session_start();
+        $id =  $_SESSION['ID'];
+        $sql = "SELECT * from team where teamId = (select teamId from user_team where userId = $id);";
+        $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
+        $row = mysqli_fetch_assoc($result);
 
+        $team_Id = $row['teamId'];
+        $compet_id = $_GET['compet_id'];
 
+        $sqm_verif = "SELECT * FROM `team_compet`";
+        $x = true;
+        $result_verif = mysqli_query($conn, $sqm_verif) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqm_verif);
+        while ($row_verif = mysqli_fetch_assoc($result_verif)) {
+            if($row_verif['teamId'] == $team_Id and $row_verif['competId'] == $compet_id ){
+                $x = false;
+                header('Location: inscrptionTournament.php?error=error');
+            }
+        }
+        if($x){
+            $sqlInsert_teamCompet = "INSERT INTO `team_compet` (`teamId`, `competId`) VALUES ($team_Id, $compet_id );";
+            $result = mysqli_query($conn, $sqlInsert_teamCompet) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlInsert_teamCompet);
+        }
+        echo 'The form is send successfully, your team are now registered';
+    }
+}
+    if(isset($_GET['error_tournament'])){
+        echo "Error, Your don't have a team, you need to be in a team to register at this tournament !";
+    }
 ?>
 
 

@@ -1,5 +1,5 @@
 <?php
-    include('connexion_db.php');
+    include('../database/connexion_db.php');
 
     if(isset($_POST["nom_contact"])){
         echo '<strong>Thanks for you feedback !</strong>';
@@ -9,19 +9,19 @@
 if(isset($_GET["compet_id"])){
     $compet_id = $_GET['compet_id'];
 
-    $sqlTournamentVue = "select team.teamName, `TEAM_POINTS`.points from team
-               join `TEAM_POINTS` on `TEAM_POINTS`.`teamId` = team.`teamId` where team.teamId  in (
-               select `TEAM_POINTS`.teamId from `TEAM_POINTS`
-               join poule on poule.pouleId = `TEAM_POINTS`.pouleId
-               join competition on $compet_id = poule.competId);";
+    $sqlTournamentVue = "SELECT t2.teamName, t.tour from competition c join `table` t on c.competId = t.competId join TABLE_TEAM TT 
+    on t.tableId = TT.tableId join team t2 on TT.teamId = t2.teamId where c.competId = $compet_id ORDER BY t.tour;";
 
     $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 }
 ?>
+<a href="index.php">
+    INDEX
+</a>
 
 <div>
     <table>
-        <caption>Poule of #### tournaments</caption>
+        <caption>Team of the ongoing  tournaments</caption>
         <thead>
         <tr>
             <th>Tournament Name</th>
@@ -32,10 +32,10 @@ if(isset($_GET["compet_id"])){
         <?php
         while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
             $teamName = $row['teamName'];
-            $points = $row['points'];
+            $tour = $row['tour'];
             echo "<tr>";
                 echo "<th>" .  $teamName  . "</th>";
-                echo "<th>" .  $points  . "</th>";
+                echo "<th>" .  $tour  . "</th>";
             echo "</tr>";
         }
         ?>
