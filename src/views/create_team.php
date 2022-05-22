@@ -2,8 +2,6 @@
     <?php
     include('../database/connexion_db.php');
 
-    session_start();
-
     if(isset($_POST["createTeamForm"])){
         $ok = true;
         if(empty($_POST["name"])){

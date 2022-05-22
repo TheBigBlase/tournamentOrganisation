@@ -1,5 +1,5 @@
 <?php 
-	include('../views/Header.php');
+    include('../database/connexion_db.php');
 
     // Inscription
 
@@ -13,6 +13,7 @@
         $req->bind_param("ssss", $_POST['user_firstname'], $_POST['user_lastname'], $_POST['user_mail'], $_POST['user_mdp']);
 				try {
 					$req->execute();
+                    echo "<h3 color=green> Vous avez bien été enregistré. </h3>";
 				}
 				catch(Exception $e){
 					die("<h3 color=red> Erreur : ".$e->getMessage());
@@ -20,7 +21,7 @@
 
         $req->close();
         $conn->close();
-				echo "<h3 color=green> Vous avez bien été enregistré. </h3>";
+
     }
 
     // Connexion
