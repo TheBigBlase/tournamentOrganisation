@@ -1,5 +1,5 @@
 <?php
-
+        /** @var $credentials array */
 		$a = include('config.php');
         /*Connexion à la base de données*/
 		$conn = @mysqli_connect($credentials["url"], $credentials["user"], $credentials["pass"]);
@@ -10,6 +10,7 @@
         } else {  
             $msg = "connecté au serveur " . mysqli_get_host_info($conn);
             /*Sélection de la base de données*/
+            /** @var $nameDB string */
             mysqli_select_db($conn, $nameDB); 
 	
             /*Encodage UTF8 pour les échanges avecla BD*/
