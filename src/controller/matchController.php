@@ -35,9 +35,11 @@ function generateMatchesForTable($conn, $tableId){
 }
 
 /**
+ * Returns all teh matches from a specific table
+ *
  * @param $conn mysqli
- * @param $tableId int
- * @return array
+ * @param $tableId int The id of the table containing the matches we want
+ * @return array All the matches
  */
 function getMatchesFromTable($conn, $tableId){
     $matchesRequest = $conn->prepare("
