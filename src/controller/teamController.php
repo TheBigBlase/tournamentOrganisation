@@ -44,4 +44,18 @@ function getTeamName($conn, $teamId){
 }
 
 
-
+/**
+ * Get all the info of a team
+ * @param $conn mysqli
+ * @param $teamId int The Id of the team
+ * @return array the name of the team in question
+ */
+function getTeam($conn, $teamId){
+    $teamNameRequest = $conn->prepare("
+        SELECT * From team where teamId=?;
+    ");
+    $teamNameRequest->bind_param("i", $teamId);
+    $teamNameRequest->execute();
+    $res = $teamNameRequest->get_result();
+    return $res->fetch_assoc();
+}

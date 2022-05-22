@@ -5,7 +5,7 @@
  * @var $conn mysqli
  * @var $competId int The id of the competition
  * @var $roundNumber int The number of the new round
- * @return int The dd of the table created.
+ * @return int The id of the table created.
  */
 function createTable($conn, $competId, $roundNumber){
     $createRoundSQL = "
@@ -69,14 +69,14 @@ function registerTeamsForRound($conn, $teamIds, $tableId){
 }
 
 /**
- * Gets the ongoing round number of a specific competition (1,2,...)
+ * Gets the ongoing table of matches of a specific competition
  *
  * @param $conn mysqli
  * @param $competId int The competition id
- * @return int the round number
+ * @return array the table in question
  */
-function getOnGoingRound($conn, $competId){
-    $currentTableRequest = $conn->prepare("Select t.tour
+function getOnGoingTable($conn, $competId){
+    $currentTableRequest = $conn->prepare("Select t.tableId, t.competId, t.tour
     from competition c join `table` t on c.competId = t.competId
         join match_t mt on t.tableId = mt.tableId
     where c.competId= ?
@@ -85,7 +85,7 @@ function getOnGoingRound($conn, $competId){
     $currentTableRequest->execute();
     $res = $currentTableRequest->get_result();
     $r = $res->fetch_assoc();
-    return $r["tour"];
+    return $r;
 }
 
 /**

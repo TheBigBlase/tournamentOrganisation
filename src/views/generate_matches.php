@@ -10,10 +10,11 @@ include "../controller/matchController.php";
 // Not possible at the time because the session varaible doesn't
 // contain the status of the user
 
-if(!isset($_POST["compet"])){
+if(empty($_GET["compet"])){
+    
     die("The competition id is not defined");
 }
-$competId=  $_POST["compet"];
+$competId=  $_GET["compet"];
 
 // At first, we check if a table has already been created :
 $sql = "
@@ -87,7 +88,7 @@ if($firstRow['tableId'] == null){
 }
 else{
     // If tables are already created, we need to create the table for the next round
-    $round = getOnGoingRound($conn, $competId);
+    $round = getOnGoingTable($conn, $competId)["tour"];
     $roundNumber = $round+1;
 
     echo "<p> Creating round $roundNumber</p>";
@@ -105,8 +106,8 @@ else{
 
     if(count($teamIds) == 1){
         // If there is only 1 team inside the teamdIds, it means that it is the winner of the whole competition
-        $teamName = getTeamName($conn, $teamIds[0]);
-        die("<p> Congrats to $teamName, you won the competition </p>");
+        $team = getTeam($conn, $teamIds[0]);
+        die("<p> Congrats to ".$team["teamName"].", you won the competition </p>");
     }
 
     if (count($teamIds) % 2 != 0) {
@@ -129,5 +130,7 @@ $conn->autocommit(TRUE);
 echo "<p>New matches : </p>";
 // Now we display all the new matches
 foreach ($nextMatches as $nextMatch) {
-    echo "<p> ".getTeamName($conn, $nextMatch[0])." vs ".getTeamName($conn, $nextMatch[1])." </p>";
+    $team1 = getTeam($conn, $nextMatch[0]);
+    $team2 = getTeam($conn, $nextMatch[1]);
+    echo "<p> ".$team1["teamName"]." vs ".$team2["teamName"]." </p>";
 }
