@@ -12,4 +12,4 @@ h1{
 }
 </style>
 
-<h1><a href="Index.php">Tournament</a></h1>
+<h1><a href="indexFRONT.php">Tournament</a></h1>
