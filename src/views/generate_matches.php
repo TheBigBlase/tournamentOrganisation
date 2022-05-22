@@ -6,13 +6,14 @@ include "../controller/tableController.php";
 include "../controller/teamController.php";
 include "../controller/matchController.php";
 
-if(!isset($_GET["compet"])){
+// todo : check if user is staff
+// Not possible at the time because the session varaible doesn't
+// contain the status of the user
+
+if(!isset($_POST["compet"])){
     die("The competition id is not defined");
 }
-$competId=  $_GET["compet"];
-
-
-
+$competId=  $_POST["compet"];
 
 // At first, we check if a table has already been created :
 $sql = "
