@@ -1,5 +1,5 @@
 <?php 
-	include('../views/Header.php');
+	include('../views/header.php');
 
     // Inscription
 
