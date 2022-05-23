@@ -1,6 +1,6 @@
 <?php
 
-/*Connexion à la base de données*/
+$a = include('config.php');/*Connexion à la base de données*/
 $conn = @mysqli_connect($credentials["url"], $credentials["user"], $credentials["pass"]);
 
 if (mysqli_connect_errno()) {
