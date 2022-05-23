@@ -156,3 +156,28 @@ function getWinnersForRound($conn, $competId, $tour){
 
     return $winners;
 }
+
+/**
+ * Gets all the tables present in a
+ *
+ * @param $conn mysqli
+ * @param $competID int the id of the competition we wish to visualize
+ * @return array an array of tables
+ */
+function getTablesForCompet($conn, $competID){
+    $tablesRequest = $conn->prepare("
+        SELECT t.tableId, t.competId, t.tour
+        FROM competition c join `table` t on c.competId = t.competId
+        where c.competId = ?
+    ");
+    $tablesRequest->bind_param("i", $competID);
+    $tablesRequest->execute();
+    $res = $tablesRequest->get_result();
+
+    $tables = [];
+    while ($row = $res->fetch_assoc()){
+        $tables[] = $row;
+
+    }
+    return $tables;
+}
