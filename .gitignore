@@ -1,2 +1,5 @@
 .idea/
-src/database/config.php
+**/config.php
+.*/
+tournamentbot/
+.*
