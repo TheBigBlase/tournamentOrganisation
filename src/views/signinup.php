@@ -1,10 +1,5 @@
-<?php 
-<<<<<<< HEAD
-	include('../views/header.php');
-
-=======
+<?php
 	include('./header.php');
->>>>>>> BACKindex
     // Inscription
 	if(isset($_POST['user_firstname']) && $_POST['user_firstname'] != '' && 
 	isset($_POST['user_lastname']) && $_POST['user_lastname'] != '' && 
