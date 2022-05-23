@@ -42,3 +42,28 @@ function getTeam($conn, $teamId){
     return $res->fetch_assoc();
 }
 
+/**
+ * Gets all the teams present in a certain competition
+ *
+ * @param $conn mysqli
+ * @param $competId int the Id of te competition
+ * @return array All the teams
+ */
+function getTeamsInCompetition($conn, $competId){
+    $teamsRequest = $conn->prepare("
+        SELECT t.teamName, t.teamId
+        from TEAM_COMPET tt join team t on tt.teamId = t.teamId
+        where competId = ?
+    ");
+    $teamsRequest->bind_param("i", $competId);
+    $teamsRequest->execute();
+    $res = $teamsRequest->get_result();
+    if($res === false){
+        return [];
+    }
+    $teams = [];
+    while ($row = $res->fetch_assoc()){
+        $teams[] = $row;
+    }
+    return $teams;
+}
