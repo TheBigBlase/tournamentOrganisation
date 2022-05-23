@@ -1,18 +1,12 @@
 <?php
 include('../database/connexion_db.php');
 
-if(session_status() === PHP_SESSION_NONE) session_start();
-
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
 }
 
 if(isset($_GET["out"])){
     session_destroy();
-}else{
-    if(session_status() === PHP_SESSION_NONE) session_start();
-    //echo "Hello :" . $_SESSION['name'] . '<br>';
-    echo "Status" . session_status();
 }
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";

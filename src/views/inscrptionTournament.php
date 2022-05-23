@@ -3,8 +3,6 @@ include('../database/connexion_db.php');
 $sql = "SELECT * FROM `competition` WHERE CURRENT_DATE <= competition.endInscription;";
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
-
-echo session_status();
 ?>
 
 <a href="index.php">
