@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Yaldevi:wght@300&display=swap" rel="stylesheet"> 
+        <title>Sigma Tournament</title>
+    </head>
+    <body>
+        <!--HEADER-->
+        <header>
+            <!--NAVBAR-->
+            <nav>
+                <h1 class="name">Sigma Tournament</h1>
+                <input type='checkbox' id='toggle'>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tournament.html">Tournaments</a></li>
+                    <li><a href="team.html">Teams</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="container">
+                    <button type="button" onclick="window.location.href='logsignin.html';">Sign In / Sign Up</button>
+                </div>
+                <label for="toggle"><span class="bars"></span></label>
+            </nav>
+        </header>
+
+        <!--CARD-->
+        <section class="vignette">
+            <div class="card">
+                <span>Want To Play ?</span>
+                <div class="link">
+                    <p class="card_author">Create<a href="#" class="author_link"> A Tournament</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!--ALL-->
+        <section class="ongoing">
+            <h1 class="title">All Tournaments</h1>
+            <div class="tournaments">
+                <a class="link" href="">
+                    <div class="tournament">
+                        <span class="name-"><p class="title-cat">name</p><h1>Chess Tournament</h1></span>
+                        <span class="descr"><p class="title-cat">description</p><h1>Chess Tournament. MIN ELO : 1800</h1></span>
+                        <span class="end"><p class="title-cat">end</p><h1>Sam 18 May.</h1></span>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="tournament">
+                        <span class="name-"><p class="title-cat">name</p><h1>Poker Tournament</h1></span>
+                        <span class="descr"><p class="title-cat">description</p><h1> 8 Tables. 15,000$ Cash Prize.</h1></span>
+                        <span class="end"><p class="title-cat">end</p><h1>Sam 18 May.</h1></span>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="tournament">
+                        <span class="name-"><p class="title-cat">name</p><h1>Tennis Tournament</h1></span>
+                        <span class="descr"><p class="title-cat">description</p><h1>Tennis Tournament. 16 Players.</h1></span>
+                        <span class="end"><p class="title-cat">end</p><h1>Sam 18 May.</h1></span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!--SEPARATION-->
+        <section class="sep"></section>
+
+        <!--CONTACT-->
+        <section class="contact" id="contact">
+            <h1 class="title">Contact Us</h1>
+            <div class="areas">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="text" name="email" class="email" placeholder="E-MAIL"><br><br>
+                    <input type="text" name="objet" class="objet" placeholder="Object"><br><br>
+                    <textarea class="mail" name="content" placeholder="Content"></textarea><br><br>
+                    <input type="submit" name="send" class="submit" value="Send">
+                </form>
+                <p>Un voyage ? Un Hotel ? Trivago !</p>
+            </div>
+        </section>
+
+        <!--FOOTER-->
+        <footer>
+            <div class="ending">
+                <div class="legallinks">
+                    <a href="">Mentions Légales</a><br>
+                    <a href="">C.G.U</a><br>
+                    <a href="">Contact</a><br>
+                    <a href="">About Us</a><br>
+                </div>
+                <div class="sociallinks">
+                    <a href=""><img src="assets/fb.png"></a>
+                    <a href=""><img src="assets/ig.png"></a>
+                    <a href=""><img src="assets/yt.png"></a>
+                </div>
+                <div class="contactlinks">
+                    <p>SIGMA TEAM</p>
+                    <p>Polytech Annecy</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
