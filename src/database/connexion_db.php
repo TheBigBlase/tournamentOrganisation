@@ -1,6 +1,5 @@
 <?php
 
-$a = include('../views/config.php');
 /*Connexion à la base de données*/
 $conn = @mysqli_connect($credentials["url"], $credentials["user"], $credentials["pass"]);
 
@@ -16,4 +15,4 @@ if (mysqli_connect_errno()) {
     mysqli_query($conn, "SET NAMES UTF8");
     if(session_status() === PHP_SESSION_NONE) session_start();
 }
-?>
+?> 

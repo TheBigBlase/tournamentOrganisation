@@ -1,50 +1,50 @@
-<?php
-include('../views/header.php');
+<?php 
+	include('../views/Header.php');
 
-// Inscription
+    // Inscription
 
-if(isset($_POST['user_firstname']) && $_POST['user_firstname'] != '' &&
-    isset($_POST['user_lastname']) && $_POST['user_lastname'] != '' &&
-    isset($_POST['user_mail']) && $_POST['user_mail'] != '' &&
-    isset($_POST['user_mdp']) && $_POST['user_mdp'] != '')
-{
-    $sql = "INSERT INTO user(firstname, lastname, mail, password, idUT) VALUES(?, ?, ?, ?, 3)";
-    $req = $conn->prepare($sql);
-    $req->bind_param("ssss", $_POST['user_firstname'], $_POST['user_lastname'], $_POST['user_mail'], $_POST['user_mdp']);
-    try {
+	if(isset($_POST['user_firstname']) && $_POST['user_firstname'] != '' && 
+	isset($_POST['user_lastname']) && $_POST['user_lastname'] != '' && 
+	isset($_POST['user_mail']) && $_POST['user_mail'] != '' && 
+	isset($_POST['user_mdp']) && $_POST['user_mdp'] != '')
+    {
+        $sql = "INSERT INTO user(firstname, lastname, mail, password, idUT) VALUES(?, ?, ?, ?, 3)";
+        $req = $conn->prepare($sql);
+        $req->bind_param("ssss", $_POST['user_firstname'], $_POST['user_lastname'], $_POST['user_mail'], $_POST['user_mdp']);
+				try {
+					$req->execute();
+				}
+				catch(Exception $e){
+					die("<h3 color=red> Erreur : ".$e->getMessage());
+				}
+
+        $req->close();
+        $conn->close();
+				echo "<h3 color=green> Vous avez bien été enregistré. </h3>";
+    }
+
+    // Connexion
+
+    elseif(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
+    {
+        $sql = "SELECT * FROM user WHERE mail = ? AND password = ?";
+        $req = $conn->prepare($sql);
+        $req->bind_param("ss",$_POST['user_mail_c'], $_POST['user_mdp_c']);
         $req->execute();
+
+        $res = $req->get_result();
+        $data = $res->fetch_assoc();
+        
+        $_SESSION['ID'] = $data['userId'];
+        $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
+
+        echo $_SESSION['name'];
+
+        $req->close();
+        $conn->close();
+				echo "<h3 color=green> Vous etes connecté. </h3>";
     }
-    catch(Exception $e){
-        die("<h3 color=red> Erreur : ".$e->getMessage());
-    }
-
-    $req->close();
-    $conn->close();
-    echo "<h3 color=green> Vous avez bien été enregistré. </h3>";
-}
-
-// Connexion
-
-elseif(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
-{
-    $sql = "SELECT * FROM user WHERE mail = ? AND password = ?";
-    $req = $conn->prepare($sql);
-    $req->bind_param("ss",$_POST['user_mail_c'], $_POST['user_mdp_c']);
-    $req->execute();
-
-    $res = $req->get_result();
-    $data = $res->fetch_assoc();
-
-    $_SESSION['ID'] = $data['userId'];
-    $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
-
-    echo $_SESSION['name'];
-
-    $req->close();
-    $conn->close();
-    echo "<h3 color=green> Vous etes connecté. </h3>";
-}
-
+	
 ?>
 
 <h2>S'inscrire</h2>
