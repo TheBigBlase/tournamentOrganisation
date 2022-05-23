@@ -1,5 +1,5 @@
 <?php
-include "Header.php";
+include "header.php";
 include "../controller/tableController.php";
 include "../controller/matchController.php";
 include "../controller/teamController.php";

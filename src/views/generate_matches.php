@@ -1,7 +1,7 @@
 <?php
 /** @var $conn mysqli */
 
-include "Header.php";
+include "header.php";
 include "../controller/tableController.php";
 include "../controller/teamController.php";
 include "../controller/matchController.php";
