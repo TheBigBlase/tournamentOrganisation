@@ -11,33 +11,57 @@ if(!isset($_GET["compet"])){
     die("The competition is not defined");
 }
 
-$competId = (int)$_GET["compet"];
+$competId = intval($_GET["compet"]);
 
 $table = getOnGoingTable($conn, $competId);
 
 
 if(isset($_POST["submitbutton"])){
+    $ok = true;
     $teamId1 = intval($_POST["teamId1"]);
     $teamId2 = intval($_POST["teamId2"]);
 
     $score1 = intval($_POST["score1"]);
     $score2 = intval($_POST["score2"]);
 
-    $conn->autocommit(FALSE);
+    if($score1 == $score2){
+        $ok = false;
+        echo "Scores must not be the same";
+    }
 
-    updateMatchScores($conn , $table["tableId"], $teamId1, $teamId2, $score1, $score2);
+    $team1 = getTeam($conn, $teamId1);
+    $team2 = getTeam($conn, $teamId2);
 
-    $conn->commit();
-    $conn->autocommit(TRUE);
+    if(empty($team1)){
+        $ok = false;
+        echo "Team ".$teamId1." not recognized";
+    }
+    if(empty($team2)){
+        $ok = false;
+        echo "Team ".$teamId2." not recognized";
+    }
+    if($ok){
+        $conn->autocommit(FALSE);
+
+        updateMatchScores($conn , $table["tableId"], $teamId1, $teamId2, $score1, $score2);
+
+        $conn->commit();
+        $conn->autocommit(TRUE);
+
+        echo "Score successfully uploaded for match ".$team1["teamName"]." vs ".$team2["teamName"];
+    }
+
 }
 
-$matches = getMatchesFromTable($conn, $table["tableId"]);
+$matches = [];
+if(!empty($table)){
+    $matches = getMatchesFromTable($conn, $table["tableId"]);
+}
 
 foreach ($matches as $match){
     $team1 = getTeam($conn, $match["teamId1"]);
     $team2 = getTeam($conn, $match["teamId2"]);
 
-    // todo : in each form, put a hidden input to recognize which match results have been sent
     ?>
 <div>
     For the match : <?php echo $team1["teamName"]." vs ".$team2["teamName"] ?>
@@ -53,9 +77,14 @@ foreach ($matches as $match){
             <label for="score2">Score <?php echo $team2["teamName"]; ?></label>
             <input type="number" name="score2" id="score2" value="<?php echo $match["score2"]?>">
         </p>
-        <input type="submit" name="submitbutton" value="Update">
+        <input type="submit" name="submitbutton" value="Upload Scores">
     </form>
 </div>
-
-    <?php
+<?php
 }
+?>
+
+<form action="generate_matches.php" method="post">
+    <input type="hidden" name="compet" value="<?php echo $competId ?>">
+    <input type="submit" value="Generate next matches">
+</form>

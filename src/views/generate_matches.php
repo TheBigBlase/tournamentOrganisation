@@ -9,12 +9,11 @@ include "../controller/matchController.php";
 // todo : check if user is staff
 // Not possible at the time because the session varaible doesn't
 // contain the status of the user
-
-if(empty($_GET["compet"])){
+if(empty($_POST["compet"])){
     
     die("The competition id is not defined");
 }
-$competId=  $_GET["compet"];
+$competId=  $_POST["compet"];
 
 // At first, we check if a table has already been created :
 $sql = "
@@ -134,3 +133,7 @@ foreach ($nextMatches as $nextMatch) {
     $team2 = getTeam($conn, $nextMatch[1]);
     echo "<p> ".$team1["teamName"]." vs ".$team2["teamName"]." </p>";
 }
+
+?>
+
+<a href="setscores.php?compet=<?php echo $competId ?>">Set scores</a>

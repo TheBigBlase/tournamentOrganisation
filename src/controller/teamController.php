@@ -27,24 +27,6 @@ function getTeamsInTable($conn, $tableId){
 
 
 /**
- * Get the name of the team
- * @param $conn mysqli
- * @param $teamId int The Id of the team
- * @return string the name of the team in question
- */
-function getTeamName($conn, $teamId){
-    $teamNameRequest = $conn->prepare("
-        SELECT teamName From team where teamId=?;
-    ");
-    $teamNameRequest->bind_param("i", $teamId);
-    $teamNameRequest->execute();
-    $res = $teamNameRequest->get_result();
-    $row = $res->fetch_assoc();
-    return $row["teamName"];
-}
-
-
-/**
  * Get all the info of a team
  * @param $conn mysqli
  * @param $teamId int The Id of the team
@@ -59,3 +41,4 @@ function getTeam($conn, $teamId){
     $res = $teamNameRequest->get_result();
     return $res->fetch_assoc();
 }
+
