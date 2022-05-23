@@ -1,9 +1,8 @@
 <section>
     <?php
-    session_start();
+    include('../database/connexion_db.php');
 
-    $conn = @mysqli_connect("137.74.85.212", "tournamentOrganisation", "fucksql");
-    mysqli_select_db($conn, "tournamentOrg");
+    session_start();
 
     if(isset($_POST["createTeamForm"])){
         $ok = true;
@@ -27,7 +26,7 @@
             $req = "INSERT INTO team (teamName) VALUES ('".$name."')";
 
             if($conn->query($req) === true){
-                echo("<p> Uploaded successfully  </p>");
+                echo("<h3 color=green> Uploaded successfully  </h3>");
             }
             else{
                 echo("<p> Error, can't upload this user </p>");
@@ -39,7 +38,7 @@
                     $userId = $conn->real_escape_string($value);
                     $plrreq = "INSERT INTO USER_TEAM (userId, teamId) VALUES ($value, (SELECT teamId from team where teamName='$name'))";
                     if($conn->query($plrreq) === true){
-                        echo("<p> Upload réussit </p>");
+                        //echo("<p> Upload réussit </p>");//not needed
                     }
                     else{
                         echo("<p> Erreur </p>");

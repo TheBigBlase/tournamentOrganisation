@@ -1,18 +1,17 @@
 <?php
-include('Header.php');
+include('../database/connexion_db.php');
 
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
 }
 
+if(isset($_GET["out"])){
+    session_destroy();
+}
 
 $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
-
-
-
 ?>
-
 
 <!-- signup/signin section -->
 <style>
@@ -20,13 +19,39 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
         border: black 1px solid;
     }
 </style>
+<?php
+if(session_status() == PHP_SESSION_ACTIVE){
+    echo "
+        <div>
+            <a href='index.php?out=out'>
+                <span>Log out</span>
+            </a>
+        </div><br>
+        ";
+}else{
+    echo "
+        <div>
+            <a href='signinup.php'>
+                <span>Sign in / Sign up</span>
+            </a>
+        </div><br>
+        ";
+}
+
+
+?>
+<!-- creation tournment redirecte -->
 
 <div>
-    <a href="signinup.php">
-        <span>Sign in / Sign up</span>
-    </a>
+    <a href="creationTournament.php"> Creation tournament </a>
 </div>
-<br>
+
+<!-- inscription tournment redirecte -->
+
+<div>
+    <a href="inscrptionTournament.php"> Inscription tournament </a>
+</div>
+
 <!-- Tournament vue section -->
 <div>
     <table>
@@ -56,10 +81,9 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 </div>
 <br>
 <!-- Contact section -->
-
 <div>
-    <h2>Contact</h2>
-    <form method="POST">
+    <h1>Contact</h1>
+    <form action="index.php" method="POST">
     <label>
         Your name (Required) :
         <input type="text" name="nom_contact" required>

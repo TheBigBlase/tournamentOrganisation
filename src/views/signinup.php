@@ -1,26 +1,33 @@
 <?php 
-	include('Header.php');
+	include('../views/Header.php');
 
     // Inscription
 
-    if(isset($_POST['user_pseudo']) && $_POST['user_pseudo'] != '' && isset($_POST['user_mail']) && $_POST['user_mail'] != '' && isset($_POST['user_mdp']) && $_POST['user_mdp'] != '')
+	if(isset($_POST['user_firstname']) && $_POST['user_firstname'] != '' && 
+	isset($_POST['user_lastname']) && $_POST['user_lastname'] != '' && 
+	isset($_POST['user_mail']) && $_POST['user_mail'] != '' && 
+	isset($_POST['user_mdp']) && $_POST['user_mdp'] != '')
     {
-        $sql = "INSERT INTO user(name, mail, password) VALUES(?, ?, ?)";
-        echo $sql;
+        $sql = "INSERT INTO user(firstname, lastname, mail, password, idUT) VALUES(?, ?, ?, ?, 3)";
         $req = $conn->prepare($sql);
-        $req->bind_param("sss",$_POST['user_pseudo'], $_POST['user_mail'], $_POST['user_mdp']);
-        $req->execute();
+        $req->bind_param("ssss", $_POST['user_firstname'], $_POST['user_lastname'], $_POST['user_mail'], $_POST['user_mdp']);
+				try {
+					$req->execute();
+				}
+				catch(Exception $e){
+					die("<h3 color=red> Erreur : ".$e->getMessage());
+				}
 
         $req->close();
         $conn->close();
+				echo "<h3 color=green> Vous avez bien été enregistré. </h3>";
     }
 
     // Connexion
 
-    if(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
+    elseif(isset($_POST['user_mail_c']) && $_POST['user_mail_c'] != '' && isset($_POST['user_mdp_c']) && $_POST['user_mail_c'] != '')
     {
         $sql = "SELECT * FROM user WHERE mail = ? AND password = ?";
-        echo $sql;
         $req = $conn->prepare($sql);
         $req->bind_param("ss",$_POST['user_mail_c'], $_POST['user_mdp_c']);
         $req->execute();
@@ -29,13 +36,13 @@
         $data = $res->fetch_assoc();
         
         $_SESSION['ID'] = $data['userId'];
-        $_SESSION['name'] = $data['name'];
+        $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
 
-        echo $_SESSION['ID'];
         echo $_SESSION['name'];
 
         $req->close();
         $conn->close();
+				echo "<h3 color=green> Vous etes connecté. </h3>";
     }
 	
 ?>
@@ -43,8 +50,12 @@
 <h2>S'inscrire</h2>
 <form action="signinup.php" method="post">
     <div>
-        <label for="pseudo">Pseudo :</label>
-        <input type="text" id="pseudo" name="user_pseudo">
+        <label for="prénom">prénom :</label>
+        <input type="text" id="prenom" name="user_firstname">
+    </div>
+    <div>
+        <label for="nom">nom :</label>
+        <input type="text" id="nom" name="user_lastname">
     </div>
     <div>
         <label for="mail">e-mail&nbsp;:</label>
@@ -54,11 +65,10 @@
         <label for="mdp">Mot de passe :</label>
         <input id="mdp" name="user_mdp"></input>
     </div>
-
     <input type="submit" value="Envoyer le formulaire">
 </form>
 
-<h2>Lacrimatica</h2>
+<h2>Se connecter</h2>
 <form action="signinup.php" method="post">
     <div>
         <label for="mail">e-mail&nbsp;:</label>
