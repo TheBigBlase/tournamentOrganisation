@@ -100,22 +100,22 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
 <form action="signinup.php" method="post">
     <div>
         <label for="user_firstname">Firstname :</label>
-        <input type="text" id="user_firstname" name="user_firstname">
+        <input type="text" id="user_firstname" name="user_firstname" value="<?php if(!empty($_POST["user_firstname"])) echo $_POST["user_firstname"]; ?>">
     </div>
     <div>
         <label for="user_lastname">Lastname :</label>
-        <input type="text" id="user_lastname" name="user_lastname">
+        <input type="text" id="user_lastname" name="user_lastname" value="<?php if(!empty($_POST["user_lastname"])) echo $_POST["user_lastname"]; ?>">
     </div>
     <div>
         <label for="user_type">Who are you ?</label>
         <select name="user_type" id="user_type">
-            <option value="1" selected>A student from this university</option>
-            <option value="2" >A person outside the university</option>
+            <option value="1" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==1) echo "selected"; ?>>A student from this university</option>
+            <option value="2" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==2) echo "selected"; ?>>A person outside the university</option>
         </select>
     </div>
     <div>
         <label for="user_mail">e-mail :</label>
-        <input type="email" id="user_mail" name="user_mail">
+        <input type="email" id="user_mail" name="user_mail" value="<?php if(!empty($_POST["user_mail"])) echo $_POST["user_mail"]; ?>">
     </div>
 
     <div>
@@ -135,11 +135,11 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
 <form action="signinup.php" method="post">
     <div>
         <label for="mail">e-mail :</label>
-        <input type="email" id="mail" name="user_mail_c">
+        <input type="email" id="mail" name="user_mail_c" value="<?php if(!empty($_POST["user_mail_c"])) echo $_POST["user_mail_c"]; ?>">
     </div>
     <div>
         <label for="mdp">Password :</label>
-        <input id="mdp" name="user_mdp_c">
+        <input type="password" id="mdp" name="user_mdp_c">
     </div>
 
     <input type="submit" name="signin" value="Sign in">
