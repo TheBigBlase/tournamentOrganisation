@@ -91,6 +91,7 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
 
         $req->close();
         $conn->close();
+        header("Location: index.php");
         echo "<h3 style='color:green'> You are now connected </h3>";
     }
 }

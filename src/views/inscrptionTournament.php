@@ -1,5 +1,7 @@
 <?php
-include('../database/connexion_db.php');
+/** @var $conn mysqli */
+include "header.php";
+
 $sql = "SELECT * FROM `competition` WHERE CURRENT_DATE <= competition.endInscription;";
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
@@ -50,7 +52,6 @@ if(!isset($_SESSION['ID'])){
 }
 if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $id =  $_SESSION['ID'];
-    //echo   $_SESSION['name'];
 
     $sql = "SELECT * from team where teamId = (select teamId from user_team where userId = $id);";
     $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
@@ -86,16 +87,15 @@ if(isset($_GET['error'])){
     echo 'Error, Your team is already registered';
 }else{
     if(isset($_GET['compet_id'])){
-        session_start();
         $id =  $_SESSION['ID'];
-        $sql = "SELECT * from team where teamId = (select teamId from user_team where userId = $id);";
+        $sql = "SELECT * from team where teamId = (select teamId from USER_TEAM where userId = $id);";
         $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
         $row = mysqli_fetch_assoc($result);
 
         $team_Id = $row['teamId'];
         $compet_id = $_GET['compet_id'];
 
-        $sqm_verif = "SELECT * FROM `team_compet`";
+        $sqm_verif = "SELECT * FROM `TEAM_COMPET`";
         $x = true;
         $result_verif = mysqli_query($conn, $sqm_verif) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqm_verif);
         while ($row_verif = mysqli_fetch_assoc($result_verif)) {
@@ -105,7 +105,7 @@ if(isset($_GET['error'])){
             }
         }
         if($x){
-            $sqlInsert_teamCompet = "INSERT INTO `team_compet` (`teamId`, `competId`) VALUES ($team_Id, $compet_id );";
+            $sqlInsert_teamCompet = "INSERT INTO `TEAM_COMPET` (`teamId`, `competId`) VALUES ($team_Id, $compet_id );";
             $result = mysqli_query($conn, $sqlInsert_teamCompet) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlInsert_teamCompet);
         }
         echo 'The form is send successfully, your team are now registered';

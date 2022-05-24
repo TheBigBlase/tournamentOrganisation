@@ -1,5 +1,6 @@
 <?php
-include('../database/connexion_db.php');
+/** @var $conn mysqli */
+include('header.php');
 
 if(isset($_POST["nom_contact"])){
     echo '<strong>Thanks for you feedback !</strong>';
@@ -13,33 +14,7 @@ $sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 ?>
 
-<!-- signup/signin section -->
-<style>
-    td{
-        border: black 1px solid;
-    }
-</style>
-<?php
-if(session_status() == PHP_SESSION_ACTIVE){
-    echo "
-        <div>
-            <a href='index.php?out=out'>
-                <span>Log out</span>
-            </a>
-        </div><br>
-        ";
-}else{
-    echo "
-        <div>
-            <a href='signinup.php'>
-                <span>Sign in / Sign up</span>
-            </a>
-        </div><br>
-        ";
-}
 
-
-?>
 <!-- creation tournment redirecte -->
 
 <div>

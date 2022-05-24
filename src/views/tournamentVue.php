@@ -1,9 +1,9 @@
 <?php
-    include('../database/connexion_db.php');
+include "header.php";
 
-    if(isset($_POST["nom_contact"])){
-        echo '<strong>Thanks for you feedback !</strong>';
-    }
+if(isset($_POST["nom_contact"])){
+    echo '<strong>Thanks for you feedback !</strong>';
+}
 
 
 if(isset($_GET["compet_id"])){
@@ -12,12 +12,9 @@ if(isset($_GET["compet_id"])){
     $sqlTournamentVue = "SELECT t2.teamName, t.tour from competition c join `table` t on c.competId = t.competId join TABLE_TEAM TT 
     on t.tableId = TT.tableId join team t2 on TT.teamId = t2.teamId where c.competId = $compet_id ORDER BY t.tour;";
 
-    $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
+    $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Can't read the current: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 }
 ?>
-<a href="index.php">
-    INDEX
-</a>
 
 <div>
     <table>
@@ -42,4 +39,3 @@ if(isset($_GET["compet_id"])){
         </tbody>
     </table>
 </div>
-<br>
