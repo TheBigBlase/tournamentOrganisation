@@ -1,14 +1,15 @@
 <?php
 /** @var $conn mysqli */
 
-include "header.php";
 include "../controller/tableController.php";
 include "../controller/teamController.php";
 include "../controller/matchController.php";
 
-// todo : check if user is staff
-// Not possible at the time because the session varaible doesn't
-// contain the status of the user
+if($_SESSION["type"] != "admin"){
+    header("Location: index.php");
+    exit();
+}
+
 if(empty($_POST["compet"])){
     
     die("The competition id is not defined");
@@ -136,4 +137,4 @@ foreach ($nextMatches as $nextMatch) {
 
 ?>
 
-<a href="setscores.php?compet=<?php echo $competId ?>">Set scores</a>
+<a href="index.php?page=setscores&compet=<?php echo $competId ?>">Set scores</a>

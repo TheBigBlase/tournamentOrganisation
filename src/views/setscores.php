@@ -1,11 +1,13 @@
 <?php
-include "header.php";
 include "../controller/tableController.php";
 include "../controller/matchController.php";
 include "../controller/teamController.php";
 /** @var $conn mysqli */
 
-// todo : check if the user is an admin
+if($_SESSION["type"] != "admin"){
+    header("Location: index.php");
+    exit();
+}
 
 if(!isset($_GET["compet"])){
     die("The competition is not defined");
@@ -66,7 +68,7 @@ foreach ($matches as $match){
 <div>
     For the match : <?php echo $team1["teamName"]." vs ".$team2["teamName"] ?>
 
-    <form action="setscores.php?compet=<?php echo $competId ?>" method="post">
+    <form action="index.php?page=setscores&compet=<?php echo $competId ?>" method="post">
         <input type="hidden" name="teamId1" value="<?php echo $team1["teamId"]; ?>">
         <input type="hidden" name="teamId2" value="<?php echo $team2["teamId"]; ?>">
         <p>
@@ -84,7 +86,7 @@ foreach ($matches as $match){
 }
 ?>
 
-<form action="generate_matches.php" method="post">
+<form action="index.php?page=generate_matches" method="post">
     <input type="hidden" name="compet" value="<?php echo $competId ?>">
     <input type="submit" value="Generate next matches">
 </form>

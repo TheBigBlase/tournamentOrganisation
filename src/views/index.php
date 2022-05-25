@@ -1,80 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tournaments</title>
+</head>
+<body>
 <?php
-/** @var $conn mysqli */
-include('header.php');
-
-if(isset($_POST["nom_contact"])){
-    echo '<strong>Thanks for you feedback !</strong>';
-}
-
-if(isset($_GET["out"])){
-    session_destroy();
-}
-
-$sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
-$resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
+include "header.php";
 ?>
+<main>
+<?php
+if(isset($_GET["page"])){
+    switch ($_GET["page"]){
+        case "signinup":
+            include "signinup.php";
+            break;
+        case "competition":
+            include "tournament_vue.php";
+            break;
+        case "generate_matches":
+            include "generate_matches.php";
+            break;
+        case "create_team":
+            include "create_team.php";
+            break;
+        case "inscription":
+            include "inscription_tournament.php";
+            break;
+        case "setscores":
+            include "setscores.php";
+            break;
+        case "create_tournament":
+            include "create_tournament.php";
+            break;
+        default :
+            include "welcome.php";
+            break;
+    }
+}
+else{
+    include "welcome.php";
+}
+?>
+</main>
 
-
-<!-- creation tournment redirecte -->
-
-<div>
-    <a href="creationTournament.php"> Creation tournament </a>
-</div>
-
-<!-- inscription tournment redirecte -->
-
-<div>
-    <a href="inscrptionTournament.php"> Inscription tournament </a>
-</div>
-
-<!-- Tournament vue section -->
-<div>
-    <table>
-        <caption>Ongoing tournaments</caption>
-        <thead>
-        <tr>
-            <th>Tournament id</th>
-            <th>Tournament Name</th>
-            <th>End inscription date</th>
-        </tr>
-        </thead>
-        <tbody style=" ">
-        <?php
-        while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
-            $competid = $row['competId'];
-            $competName = $row['competName'];
-            $endInscription = $row['endInscription'];
-            echo "<tr onmouseover='this.style.background=\"#0ff \"' onmouseout='this.style.background=\"#fff\"' onclick=\"location.href='tournamentVue.php?compet_id=$competid'\">";
-                echo "<td>".  $competid  . "</td>";
-                echo "<td>" .  $competName  . "</td>";
-                echo "<td>" .  $endInscription  . "</td>";
-            echo "</a></tr>";
-        }
-        ?>
-        </tbody>
-    </table>
-</div>
-<br>
-<!-- Contact section -->
-<div>
-    <h1>Contact</h1>
-    <form action="index.php" method="POST">
-    <label>
-        Your name (Required) :
-        <input type="text" name="nom_contact" required>
-    </label>
-    <label>
-        Your email (Required) :
-        <input type="email" name="email" required>
-    </label>
-    <label>
-        Who are you ?
-        <select name="user_type">
-            <option value="">Student</option>
-            <option value="">Staff</option>
-            <option value="">Normie's</option>
-        </select>
-    </label>
-        <input type="submit"  value="Send">
-    </form>
-</div>
+<footer>
+    &copy; Polytech 2021 - 2022
+</footer>
+</body>
+</html>

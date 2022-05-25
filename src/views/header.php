@@ -1,6 +1,11 @@
 <?php
 
-session_start();
+if(session_status() === PHP_SESSION_NONE) session_start();
+if(isset($_GET["out"])){
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
 
 include('../database/connexion_db.php');
 
@@ -33,7 +38,7 @@ if(isset($_SESSION["name"])){
 }else{
     echo "
         <div class='signinup'> 
-            <a href='signinup.php'>
+            <a href='index.php?page=signinup'>
                 <span>Sign in / Sign up</span>
             </a>
         </div><br>

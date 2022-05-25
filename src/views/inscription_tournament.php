@@ -1,15 +1,10 @@
 <?php
 /** @var $conn mysqli */
-include "header.php";
 
 $sql = "SELECT * FROM `competition` WHERE CURRENT_DATE <= competition.endInscription;";
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
 ?>
-
-<a href="index.php">
-    INDEX
-</a>
 
 <div>
     <table>
@@ -37,7 +32,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
             echo "<td>" .  $competName  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
             if(isset($_SESSION['ID'])) {
-                echo "<td><a href='inscrptionTournament.php?competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
+                echo "<td><a href='index.php?page=inscription&competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
             }
             echo "</a></tr>";
         }
@@ -48,8 +43,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
 <br>
 
 <?php
-if(!isset($_SESSION['ID'])){
-}
+
 if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $id =  $_SESSION['ID'];
 
@@ -57,7 +51,8 @@ if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
     $row = mysqli_fetch_assoc($result);
     if($teamName = $row['teamName'] == null){
-        header('Location: inscrptionTournament.php?error_tournament=error_tournament');
+        header('Location: inscription_tournament.php?error_tournament=error_tournament');
+        exit();
     };
     $teamName = $row['teamName'];
     $tournamentName = $_GET['competName'];
@@ -66,7 +61,7 @@ if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     echo "
     <div>
         <h1>Register form</h1>
-        <form ACTION='inscrptionTournament.php?form=form&team_id=$teamId&compet_id=$competid' METHOD='post'>
+        <form ACTION='index.php?page=inscription&form=form&team_id=$teamId&compet_id=$competid' METHOD='post'>
             <label>
                 Your current team :
                 <input type='text' value='$teamName' disabled>
@@ -101,7 +96,8 @@ if(isset($_GET['error'])){
         while ($row_verif = mysqli_fetch_assoc($result_verif)) {
             if($row_verif['teamId'] == $team_Id and $row_verif['competId'] == $compet_id ){
                 $x = false;
-                header('Location: inscrptionTournament.php?error=error');
+                header('Location: inscription_tournament.php?error=error');
+                exit();
             }
         }
         if($x){

@@ -1,6 +1,5 @@
 <?php
 /** @var $conn mysqli */
-include('./header.php');
 var_dump($_SESSION);
 // Inscription
 if( isset($_POST['signup']))
@@ -92,13 +91,13 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
         $req->close();
         $conn->close();
         header("Location: index.php");
-        echo "<h3 style='color:green'> You are now connected </h3>";
+        exit();
     }
 }
 ?>
 
 <h2>Sign up</h2>
-<form action="signinup.php" method="post">
+<form action="index.php?page=signinup" method="post">
     <div>
         <label for="user_firstname">Firstname :</label>
         <input type="text" id="user_firstname" name="user_firstname" value="<?php if(!empty($_POST["user_firstname"])) echo $_POST["user_firstname"]; ?>">
@@ -133,7 +132,7 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
 </form>
 
 <h2>Sign in</h2>
-<form action="signinup.php" method="post">
+<form action="index.php?page=signinup" method="post">
     <div>
         <label for="mail">e-mail :</label>
         <input type="email" id="mail" name="user_mail_c" value="<?php if(!empty($_POST["user_mail_c"])) echo $_POST["user_mail_c"]; ?>">

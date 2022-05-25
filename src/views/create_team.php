@@ -1,8 +1,7 @@
 <section>
     <?php
+    /** @var $conn mysqli */
     include('../database/connexion_db.php');
-
-    session_start();
 
     if(isset($_POST["createTeamForm"])){
         $ok = true;
@@ -16,51 +15,55 @@
                 $i++;
             }
         }
+
         if($i==0){
             echo "<p class='error'> You need at least 1 player </p>";
             $ok = false;
         }
-
+        $conn->autocommit(FALSE);
         if($ok){
             $name = $conn->real_escape_string($_POST["name"]);
             $req = "INSERT INTO team (teamName) VALUES ('".$name."')";
 
             if($conn->query($req) === true){
-                echo("<h3 color=green> Uploaded successfully  </h3>");
+                echo("<h3 style='color: green'> Team created successfully  </h3>");
             }
+
             else{
-                echo("<p> Error, can't upload this user </p>");
+                echo("<p> Error, can't create this team </p>");
                 var_dump($conn->error);
                 $ok = false;
             }
+            $lastId = $conn->insert_id;
             foreach ($_POST as $key => $value){
                 if(substr($key, 0, 3) == "plr"){
-                    $userId = $conn->real_escape_string($value);
-                    $plrreq = "INSERT INTO USER_TEAM (userId, teamId) VALUES ($value, (SELECT teamId from team where teamName='$name'))";
-                    if($conn->query($plrreq) === true){
-                        //echo("<p> Upload réussit </p>");//not needed
-                    }
-                    else{
-                        echo("<p> Erreur </p>");
-                        $conn->rollback();
+                    $userId = intval(substr($key, 3));
+                    $plrreq = "INSERT INTO USER_TEAM (userId, teamId) VALUES ($userId, $lastId)";
+                    echo $plrreq;
+                    if($conn->query($plrreq) !== true){
+                        echo("<p> Error </p>");
                         var_dump($conn->error);
+                        $conn->rollback();
                         $ok = false;
                     }
                 }
             }
         }
+        $conn->commit();
+        $conn->autocommit(TRUE);
+
     }
 
     $user_req = "SELECT * from user";
     $users = mysqli_query($conn, $user_req) or die("Requête invalide: ". mysqli_error($conn)."\n".$user_req);
     ?>
     <h1>Create you own team</h1>
-    <form action="create_team.php" method="post">
+    <form action="index.php?page=create_team" method="post">
         <p>
             <label for="name">Name</label>
             <input type="text" name="name" id="name">
         </p>
-        <p id="users">
+        <div id="users">
             <label for="users">People in your teams</label>
             <select name="users" id="users">
                 <?php
@@ -72,10 +75,16 @@
                 ?>
             </select>
             <button type="button" onclick="addUser()" >Add</button>
-        </p>
+            <h3>Users in team : </h3>
+            <p>
+                <label> <?php echo $_SESSION["name"]?> </label>
+                <input type="hidden" id="<?php echo $_SESSION["ID"]?>" value="<?php echo $_SESSION["ID"]?>" name="<?php echo "plr".$_SESSION["ID"]?>"/>
+            </p>
+        </div>
+
 
         <p>
-            <input type="submit" value="Créer" name="createTeamForm">
+            <input type="submit" value="Create" name="createTeamForm">
         </p>
     </form>
     <script>
