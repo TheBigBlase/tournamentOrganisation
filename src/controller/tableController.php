@@ -69,11 +69,31 @@ function registerTeamsForRound($conn, $teamIds, $tableId){
 }
 
 /**
+ * Gets the very last table of the competition
+ *
+ * @param $conn mysqli
+ * @param $competId int The competition id
+ * @return array|null the table in question
+ */
+function getLastTableFromCompet($conn, $competId){
+    $lastTableRequest = $conn->prepare("
+        SELECT tableId, competId, tour
+        from `table`
+        where competId = ?
+        ORDER BY tour DESC  
+    ");
+    $lastTableRequest->bind_param("i", $competId);
+    $lastTableRequest->execute();
+    $res = $lastTableRequest->get_result();
+    return $res->fetch_assoc();
+}
+
+/**
  * Gets the ongoing table of matches of a specific competition
  *
  * @param $conn mysqli
  * @param $competId int The competition id
- * @return array the table in question
+ * @return array|null the table in question
  */
 function getOnGoingTable($conn, $competId){
     $currentTableRequest = $conn->prepare("Select t.tableId, t.competId, t.tour
@@ -85,6 +105,9 @@ function getOnGoingTable($conn, $competId){
     $currentTableRequest->execute();
     $res = $currentTableRequest->get_result();
     $r = $res->fetch_assoc();
+    if($r == null){
+        return getLastTableFromCompet($conn, $competId);
+    }
     return $r;
 }
 

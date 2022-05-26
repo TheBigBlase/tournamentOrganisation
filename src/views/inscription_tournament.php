@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
 if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $id =  $_SESSION['ID'];
 
-    $sql = "SELECT * from team where teamId = (select teamId from user_team where userId = $id);";
+    $sql = "SELECT * from team where teamId = (select teamId from USER_TEAM where userId = $id);";
     $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
     $row = mysqli_fetch_assoc($result);
     if($teamName = $row['teamName'] == null){

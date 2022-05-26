@@ -12,19 +12,19 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 ?>
 
 
-<!-- creation tournment redirecte -->
+<!-- creation tournament redirect -->
 <?php
 if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
     ?>
     <div>
-        <a href="index.php?page=create_tournament"> Creation tournament </a>
+        <a href="index.php?page=create_competition"> Creation tournament </a>
     </div>
 <?php
 }
 
 
 ?>
-<!-- inscription tournment redirecte -->
+<!-- inscription tournament redirect -->
 
 <div>
     <a href="index.php?page=inscription"> Inscription tournament </a>

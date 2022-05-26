@@ -53,3 +53,7 @@ foreach ($tables as $table){
         <?php
     }
 }
+
+if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
+    echo "<a href='index.php?page=setscores&compet=$competId'>Set scores</a>";
+}

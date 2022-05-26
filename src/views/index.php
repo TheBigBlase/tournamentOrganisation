@@ -33,8 +33,8 @@ if(isset($_GET["page"])){
         case "setscores":
             include "setscores.php";
             break;
-        case "create_tournament":
-            include "create_tournament.php";
+        case "create_competition":
+            include "create_competition.php";
             break;
         default :
             include "welcome.php";

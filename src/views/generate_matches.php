@@ -15,7 +15,9 @@ if(empty($_POST["compet"])){
     die("The competition id is not defined");
 }
 $competId=  $_POST["compet"];
-
+?>
+<a href="index.php?page=setscores&compet=<?php echo $competId ?>">Set scores</a>
+<?php
 // At first, we check if a table has already been created :
 $sql = "
     Select c.competId, t.tableId, t.tour 
@@ -72,7 +74,10 @@ if($firstRow['tableId'] == null){
     // either we have an even number of teams, and it doesn't pose any problem,
     // or we have an uneven number, and we will have to make a random team win by default
 
-    if (count($teamIds) % 2 == 0) {
+    if(count($teamIds) == 0){
+        $conn->rollback();
+        die("No teams are currently entered into the competition");
+    } elseif (count($teamIds) % 2 == 0) {
         registerTeamsForRound($conn, $teamIds, $tableId);
     } else {
         $randomId = rand(0, count($teamIds) - 1);
@@ -88,6 +93,10 @@ if($firstRow['tableId'] == null){
 }
 else{
     // If tables are already created, we need to create the table for the next round
+    $onGoingTable = getOnGoingTable($conn, $competId);
+    if($onGoingTable == null){
+        die("Unable to generate matches for this competition : $competId");
+    }
     $round = getOnGoingTable($conn, $competId)["tour"];
     $roundNumber = $round+1;
 
@@ -107,7 +116,12 @@ else{
     if(count($teamIds) == 1){
         // If there is only 1 team inside the teamdIds, it means that it is the winner of the whole competition
         $team = getTeam($conn, $teamIds[0]);
-        die("<p> Congrats to ".$team["teamName"].", you won the competition </p>");
+        echo "
+            <p> Congrats to ".$team["teamName"].", you won the competition </p>
+            <a href='index.php?page=competition&compet_id=$competId'>Go back to the tournament</a>
+        ";
+
+        exit();
     }
 
     if (count($teamIds) % 2 != 0) {
@@ -137,4 +151,3 @@ foreach ($nextMatches as $nextMatch) {
 
 ?>
 
-<a href="index.php?page=setscores&compet=<?php echo $competId ?>">Set scores</a>
