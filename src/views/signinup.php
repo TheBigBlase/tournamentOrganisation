@@ -69,8 +69,9 @@ if( isset($_POST['signup']))
 elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
 {
     $sql = "
-            SELECT u.firstname, u.lastname, u.userId, uT.UTname
+            SELECT u.firstname, u.lastname, u.userId, uT.UTname, T.teamId
             FROM user u join userType uT on uT.idUT = u.idUT
+                left join USER_TEAM T on u.userId = T.userId
             WHERE mail = ? AND password = ?
             
         ";
@@ -87,6 +88,7 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
         $_SESSION['ID'] = $data['userId'];
         $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
         $_SESSION['type'] = $data["UTname"];
+        $_SESSION['team'] = $data["teamId"];
 
         $req->close();
         $conn->close();

@@ -2,11 +2,13 @@
 /** @var $conn mysqli */
 include "../controller/playgroundController.php";
 
+// We must be an admin or a staff to be able to create a competition
 if(isset($_SESSION["type"]) && $_SESSION["type"] != "admin" && $_SESSION["type"] != "staff"){
     header("Location: index.php");
     exit();
 }
 
+// Checking & Uploading the new competition
 echo  "<p class='error'> ";
 if (isset($_POST["createCompetitionForm"])){
 
@@ -70,11 +72,11 @@ echo "</p>";
 <form action="index.php?page=create_competition" method="post">
     <p>
         <label for="competName">Competition name :</label>
-        <input type="text" id="competName" name="competName">
+        <input type="text" id="competName" name="competName" value="<?php if(isset($_POST["competName"])) echo $_POST["competName"]; ?>">
     </p>
     <p>
         <label for="endInscription">End date of registration</label>
-        <input type="datetime-local" id="endInscription" name="endInscription">
+        <input type="datetime-local" id="endInscription" name="endInscription" value="<?php if(isset($_POST["endInscription"])) echo $_POST["endInscription"]; ?>">
     </p>
     <p>
         <label for="playground">Playground : </label>
@@ -84,11 +86,10 @@ echo "</p>";
             $playgrounds = getAllPlaygrounds($conn);
 
             foreach ($playgrounds as $p){
-                echo "
-                    <option value=".$p["pgId"].">".$p["pgName"]."</option>
-                ";
+                ?>
+                    <option value="<?php echo $p["pgId"]; ?>" <?php if(isset($_POST["playground"]) && $_POST["playground"]==$p["pgId"]) echo "selected"; ?>>"<?php echo $p["pgName"]; ?>"</option>
+                <?php
             }
-
             ?>
         </select>
     </p>

@@ -45,6 +45,9 @@ if(isset($_SESSION["name"])){
         ";
 }
 
-// todo : check if user is in a team. If it's not the case, we should have the option to create a team / join a team.
+if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
+    echo "<a href='create_team.php'>Create your own team</a>";
+}
+
 ?>
 </header>
