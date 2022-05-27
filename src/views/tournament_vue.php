@@ -3,12 +3,12 @@
 include "../controller/tableController.php";
 include "../controller/teamController.php";
 include "../controller/matchController.php";
+include "../controller/competitionController.php";
 
 if(empty($_GET["compet_id"])){
     die("No competition selected");
 }
 $competId = intval($_GET["compet_id"]);
-
 function searchIdInArray($id, $teams){
     foreach ($teams as $team){
         if($team["teamId"] == $id){
@@ -18,6 +18,17 @@ function searchIdInArray($id, $teams){
     return false;
 }
 
+// Here we display the winner of the competition if it is finished :
+
+if(competHasFinished($conn, $competId)){
+    $winner = getCompetitionWinner($conn, $competId);
+    echo "
+        <p>The winner of this competition is : ".$winner["teamName"] ."</p>
+    ";
+}
+else {
+    echo "<p>This competition is still ongoing</p>";
+}
 // Here, we get all the teams in the competition
 
 $teams = getTeamsInCompetition($conn, $competId);
