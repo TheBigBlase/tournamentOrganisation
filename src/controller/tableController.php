@@ -142,7 +142,7 @@ function removeTeamFromTable($conn, $teamId, $tableId){
  * @param $tour int The number of the round
  * @return array|void
  */
-function getWinnersForRound($conn, $competId, $tour){
+function getRoundWinners($conn, $competId, $tour){
     $getMatchesSql = "
         SELECT mt.teamId1, mt.teamId2, mt.score1, mt.score2
         from competition c

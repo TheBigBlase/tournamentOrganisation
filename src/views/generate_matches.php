@@ -5,7 +5,7 @@ include "../controller/tableController.php";
 include "../controller/teamController.php";
 include "../controller/matchController.php";
 
-if($_SESSION["type"] != "admin"){
+if($_SESSION["type"] != "admin" && $_SESSION["type"] != "staff"){
     header("Location: index.php");
     exit();
 }
@@ -103,7 +103,7 @@ else{
     echo "<p> Creating round $roundNumber</p>";
 
 
-    $winnersIds = getWinnersForRound($conn, $competId, $roundNumber-1);
+    $winnersIds = getRoundWinners($conn, $competId, $roundNumber-1);
 
     if (empty($winnersIds))
         die("<p> Previous matches are not over</p>");

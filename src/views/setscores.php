@@ -4,7 +4,7 @@ include "../controller/matchController.php";
 include "../controller/teamController.php";
 /** @var $conn mysqli */
 
-if($_SESSION["type"] != "admin"){
+if($_SESSION["type"] != "admin" && $_SESSION["type"] != "staff"){
     header("Location: index.php");
     exit();
 }
