@@ -9,7 +9,6 @@ if(isset($_GET["out"])){
 
 include('../database/connexion_db.php');
 
-var_dump($_SESSION);
 ?>
 
 <style>
@@ -46,7 +45,7 @@ if(isset($_SESSION["name"])){
 }
 
 if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
-    echo "<a href='create_team.php'>Create your own team</a>";
+    echo "<a href='index.php?page=create_team'>Create your own team</a>";
 }
 
 ?>

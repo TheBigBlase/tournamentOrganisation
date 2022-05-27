@@ -9,6 +9,8 @@ if(empty($_GET["compet_id"])){
     die("No competition selected");
 }
 $competId = intval($_GET["compet_id"]);
+$competition = getCompetition($conn, $competId);
+
 function searchIdInArray($id, $teams){
     foreach ($teams as $team){
         if($team["teamId"] == $id){
@@ -17,6 +19,10 @@ function searchIdInArray($id, $teams){
     }
     return false;
 }
+
+echo "<p><h3>".$competition["competName"]."</h3><br>
+        ".$competition["description"]."</p>
+        ";
 
 // Here we display the winner of the competition if it is finished :
 

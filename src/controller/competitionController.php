@@ -61,3 +61,22 @@ function getCompetitionWinner($conn, $competId){
     }
     return $res->fetch_assoc();
 }
+
+/**
+ * Gets all the infos from the competId
+ *
+ * @param $conn mysqli
+ * @param $competId int the competition Id
+ * @return array the content of the competition
+ */
+function getCompetition($conn, $competId){
+    $competRequest = $conn->prepare("
+        SELECT competId, competName, endInscription, pgId, description 
+        FROM competition
+        where competId=?
+    ");
+    $competRequest->bind_param("i", $competId);
+    $competRequest->execute();
+    $req = $competRequest->get_result();
+    return $req->fetch_assoc();
+}

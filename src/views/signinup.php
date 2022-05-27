@@ -1,6 +1,6 @@
 <?php
 /** @var $conn mysqli */
-var_dump($_SESSION);
+
 // Inscription
 if( isset($_POST['signup']))
 {

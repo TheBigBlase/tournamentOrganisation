@@ -48,6 +48,7 @@
                     }
                 }
             }
+            $_SESSION["team"] = $lastId;
         }
         $conn->commit();
         $conn->autocommit(TRUE);

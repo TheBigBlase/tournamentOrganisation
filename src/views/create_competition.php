@@ -46,12 +46,13 @@ if (isset($_POST["createCompetitionForm"])){
     if($ok){
         $competName = $_POST["competName"];
         $pgId = intval($_POST["playground"]);
+        $description = $_POST["description"];
 
         $createCompetRequest = $conn->prepare("
-            INSERT INTO competition (competName, endInscription, pgId)
-            VALUES (?, ?, ?)
+            INSERT INTO competition (competName, endInscription, pgId, description)
+            VALUES (?, ?, ?, ?)
         ");
-        $createCompetRequest->bind_param("ssi", $competName, $endInscription, $pgId);
+        $createCompetRequest->bind_param("ssis", $competName, $endInscription, $pgId, $description);
         if($createCompetRequest->execute()){
             $lastId = $conn->insert_id;
             header("Location: index.php?page=competition&compet_id=$lastId");
@@ -60,8 +61,6 @@ if (isset($_POST["createCompetitionForm"])){
             echo "Couldn't create the competition<br>";
             var_dump($conn->error);
         }
-
-
     }
 }
 echo "</p>";
@@ -71,15 +70,20 @@ echo "</p>";
 
 <form action="index.php?page=create_competition" method="post">
     <p>
-        <label for="competName">Competition name :</label>
+        <label for="competName">Competition name :</label><br>
         <input type="text" id="competName" name="competName" value="<?php if(isset($_POST["competName"])) echo $_POST["competName"]; ?>">
     </p>
     <p>
-        <label for="endInscription">End date of registration</label>
+        <label for="endInscription">End date of registration</label><br>
         <input type="datetime-local" id="endInscription" name="endInscription" value="<?php if(isset($_POST["endInscription"])) echo $_POST["endInscription"]; ?>">
     </p>
+
     <p>
-        <label for="playground">Playground : </label>
+        <label for="description">Description</label><br>
+        <textarea name="description" id="description" cols="30" rows="10"><?php if(isset($_POST["description"])) echo $_POST["description"]; ?></textarea>
+    </p>
+    <p>
+        <label for="playground">Playground : </label><br>
         <select name="playground" id="playground">
             <?php
 

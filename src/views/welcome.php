@@ -7,7 +7,11 @@ if(isset($_POST["nom_contact"])){
 
 
 
-$sqlTournamentVue = "SELECT competId,competName,endInscription FROM `competition`;";
+$sqlTournamentVue = "
+SELECT competName,endInscription,description, competId
+FROM `competition`
+ORDER BY endInscription desc;
+";
 $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlTournamentVue);
 ?>
 
@@ -36,8 +40,8 @@ if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
         <caption>Ongoing tournaments</caption>
         <thead>
         <tr>
-            <th>Tournament id</th>
             <th>Tournament Name</th>
+            <th>Tournament Description</th>
             <th>End inscription date</th>
         </tr>
         </thead>
@@ -46,10 +50,12 @@ if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
         while ($row = mysqli_fetch_assoc($resultSqlTournamentVue)) {
             $competid = $row['competId'];
             $competName = $row['competName'];
+            $description = $row["description"];
             $endInscription = $row['endInscription'];
+
             echo "<tr onmouseover='this.style.background=\"#0ff \"' onmouseout='this.style.background=\"#fff\"' onclick=\"location.href='index.php?page=competition&compet_id=$competid'\">";
-            echo "<td>".  $competid  . "</td>";
             echo "<td>" .  $competName  . "</td>";
+            echo "<td>" .  $description  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
             echo "</a></tr>";
         }
