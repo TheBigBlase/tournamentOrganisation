@@ -1,7 +1,13 @@
 <?php
 /** @var $conn mysqli */
 
-$sql = "SELECT * FROM `competition` WHERE CURRENT_DATE <= competition.endInscription;";
+$sql = "
+SELECT * 
+FROM `competition` 
+WHERE CURRENT_DATE <= competition.endInscription
+ORDER BY endInscription DESC    
+;
+";
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
 ?>
@@ -11,8 +17,8 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
         <caption>Inscription tournaments</caption>
         <thead>
         <tr>
-            <th>Tournament id</th>
             <th>Tournament Name</th>
+            <th>Tournament Description</th>
             <th>End inscription date</th>
             <?php
             if(isset($_SESSION['ID'])) {
@@ -27,9 +33,10 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
             $competid = $row['competId'];
             $competName = $row['competName'];
             $endInscription = $row['endInscription'];
+            $description = $row['description'];
             echo "<tr>";
-            echo "<td>".  $competid  . "</td>";
             echo "<td>" .  $competName  . "</td>";
+            echo "<td>" .  $description  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
             if(isset($_SESSION['ID'])) {
                 echo "<td><a href='index.php?page=inscription&competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
