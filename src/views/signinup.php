@@ -1,3 +1,5 @@
+
+
 <?php
 /** @var $conn mysqli */
 
@@ -10,35 +12,35 @@ if( isset($_POST['signup']))
 
     if(empty($_POST['user_firstname'])){
         $ok = false;
-        echo "<p>The firstname must not be empty</p>";
+        echo "<p class='error'>The firstname must not be empty</p>";
     }
     if(empty($_POST['user_lastname'])){
         $ok = false;
-        echo "<p>The lastname must not be empty</p>";
+        echo "<p class='error'>The lastname must not be empty</p>";
     }
     if(empty($_POST['user_mail'])){
         $ok = false;
-        echo "<p>The email must not be empty</p>";
+        echo "<p class='error'>The email must not be empty</p>";
     }
     if(empty($_POST['user_type'])){
         $ok = false;
-        echo "<p>The user type must completed</p>";
+        echo "<p class='error'>The user type must completed</p>";
     }
     if(empty($_POST['user_mdp'])){
         $ok = false;
-        echo "<p>The password must not be empty</p>";
+        echo "<p class='error'>The password must not be empty</p>";
     }
 
     if($_POST['user_mdp'] != $_POST['user_mdp_confirm']){
         $ok = false;
-        echo "<p>The 2 passwords don't match</p>";
+        echo "<p class='error'>The 2 passwords don't match</p>";
     }
 
     $user_type = intval($_POST['user_type']);
 
     if($user_type != 1 && $user_type != 2){
         $ok = false;
-        echo "<p>User type ".$_POST['user_type']." not found </p>";
+        echo "<p class='error'>User type ".$_POST['user_type']." not found </p>";
     }
     echo " </div>";
 
@@ -51,14 +53,14 @@ if( isset($_POST['signup']))
         }
 
         catch(Exception $e){
-            die("<h3 style='color:red'> Error : ".$e->getMessage());
+            die("<h3 class='error'> Error : ".$e->getMessage());
         }
 
         if($ok){
-            echo "<h3 style='color:green'> You have now been registered </h3>";
+            echo "<h3 class='success'> You have now been registered </h3>";
 
         } else {
-            echo "<h3 style='color:red'> This e-mail has already been used </h3>";
+            echo "<h3 class='error'> This e-mail has already been used </h3>";
         }
     }
 
@@ -97,52 +99,53 @@ elseif(!empty($_POST['user_mail_c']) && !empty($_POST['user_mdp_c']))
     }
 }
 ?>
+<section class="connect">
+    <div class="signup">
 
-<h2>Sign up</h2>
-<form action="index.php?page=signinup" method="post">
-    <div>
-        <label for="user_firstname">Firstname :</label>
-        <input type="text" id="user_firstname" name="user_firstname" value="<?php if(!empty($_POST["user_firstname"])) echo $_POST["user_firstname"]; ?>">
-    </div>
-    <div>
-        <label for="user_lastname">Lastname :</label>
-        <input type="text" id="user_lastname" name="user_lastname" value="<?php if(!empty($_POST["user_lastname"])) echo $_POST["user_lastname"]; ?>">
-    </div>
-    <div>
-        <label for="user_type">Who are you ?</label>
-        <select name="user_type" id="user_type">
-            <option value="1" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==1) echo "selected"; ?>>A student from this university</option>
-            <option value="2" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==2) echo "selected"; ?>>A person outside the university</option>
-        </select>
-    </div>
-    <div>
-        <label for="user_mail">e-mail :</label>
-        <input type="email" id="user_mail" name="user_mail" value="<?php if(!empty($_POST["user_mail"])) echo $_POST["user_mail"]; ?>">
-    </div>
+        <h2>Sign up</h2>
+        <form class="formform" action="index.php?page=signinup" method="post">
+            <div>
+                <input placeholder="Firstname" class="id" type="text" id="user_firstname" name="user_firstname" value="<?php if(!empty($_POST["user_firstname"])) echo $_POST["user_firstname"]; ?>">
+            </div>
+            <div>
+                <input placeholder="Lastname" class="id" type="text" id="user_lastname" name="user_lastname" value="<?php if(!empty($_POST["user_lastname"])) echo $_POST["user_lastname"]; ?>">
+            </div>
+            <div class="playground">
 
-    <div>
-        <label for="user_mdp">Password :</label>
-        <input type="password" id="user_mdp" name="user_mdp">
-    </div>
+                <label for="user_type">Who are you ?</label>
 
-    <div>
-        <label for="user_mdp_confirm">Confirm password :</label>
-        <input type="password" id="user_mdp_confirm" name="user_mdp_confirm">
-    </div>
+                <select name="user_type" id="user_type">
+                    <option value="1" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==1) echo "selected"; ?>>A student from this university</option>
+                    <option value="2" <?php if(!empty($_POST["user_type"]) && $_POST["user_type"]==2) echo "selected"; ?>>A person outside the university</option>
+                </select>
+            </div>
 
-    <input type="submit" name="signup" value="Sign up">
-</form>
+            <div>
+                <input placeholder="email@school.fr" class="id" type="email" id="user_mail" name="user_mail" value="<?php if(!empty($_POST["user_mail"])) echo $_POST["user_mail"]; ?>">
+            </div>
 
-<h2>Sign in</h2>
-<form action="index.php?page=signinup" method="post">
-    <div>
-        <label for="mail">e-mail :</label>
-        <input type="email" id="mail" name="user_mail_c" value="<?php if(!empty($_POST["user_mail_c"])) echo $_POST["user_mail_c"]; ?>">
-    </div>
-    <div>
-        <label for="mdp">Password :</label>
-        <input type="password" id="mdp" name="user_mdp_c">
-    </div>
+            <div>
+                <input placeholder="Password" class="pswd" type="password" id="user_mdp" name="user_mdp">
+            </div>
 
-    <input type="submit" name="signin" value="Sign in">
-</form>
+            <div>
+                <input placeholder="Confirm Password" class="pswd" type="password" id="user_mdp_confirm" name="user_mdp_confirm">
+            </div>
+
+            <input class="submit" type="submit" name="signup" value="Sign up">
+        </form>
+    </div>
+    <div class="login">
+    <h2>Sign in</h2>
+    <form class="formform" action="index.php?page=signinup" method="post">
+        <div>
+            <input placeholder="email@school.fr" class="id" type="email" id="mail" name="user_mail_c" value="<?php if(!empty($_POST["user_mail_c"])) echo $_POST["user_mail_c"]; ?>">
+        </div>
+        <div>
+            <input placeholder="Password" class="pswd" type="password" id="mdp" name="user_mdp_c">
+        </div>
+
+        <input class="submit" type="submit" name="signin" value="Sign in">
+    </form>
+    </div>
+</section>
