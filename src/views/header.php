@@ -10,43 +10,45 @@ if(isset($_GET["out"])){
 include('../database/connexion_db.php');
 
 ?>
+<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Yaldevi:wght@300&display=swap" rel="stylesheet"> 
+</head>
+        <header>
+            <!--NAVBAR-->
+            <nav>
+                <h1 class="name">Sigma Tournament</h1>
+                <input type='checkbox' id='toggle'>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tournament.html">Tournaments</a></li>
+                    <li><a href="team.html">Teams</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="container">
 
-<style>
-h1{
-    text-align: center;
-}
-</style>
-<header>
-    <h1><a href="index.php">Tournament</a></h1>
+								<?php
+								if(isset($_SESSION["name"])){
+									echo "
+										<div class=\"container\">"
+										. $_SESSION["name"] ."
+                    <button type='button' onclick=\"window.location.href='index.php?out=out';\"> Logout </button>
+										</div>
+												";
+								}else{
+										echo "
+												<button type='button' onclick=\"window.location.href='signinup.php';\">Sign in </button>";
+								}
 
-    <!-- signup/signin section -->
-    <style>
-        td{
-            border: black 1px solid;
-        }
-    </style>
-<?php
-if(isset($_SESSION["name"])){
-    echo "
-        <div class='logout'>".$_SESSION["name"]."
-            <a href='index.php?out=out'>
-                <span>Log out</span>
-            </a>
-        </div><br>
-        ";
-}else{
-    echo "
-        <div class='signinup'> 
-            <a href='index.php?page=signinup'>
-                <span>Sign in / Sign up</span>
-            </a>
-        </div><br>
-        ";
-}
+								if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
+										echo "<a href='index.php?page=create_team'>Create your own team</a>";
+								}
 
-if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
-    echo "<a href='index.php?page=create_team'>Create your own team</a>";
-}
+								?>
 
-?>
-</header>
+                </div>
+                <label for="toggle"><span class="bars"></span></label>
+            </nav>
+            <!--BANNER-->
+	</header>
