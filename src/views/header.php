@@ -38,7 +38,7 @@ include('../database/connexion_db.php');
 												";
 								}else{
 										echo "
-												<button type='button' onclick=\"window.location.href='signinup.php';\">Sign in </button>";
+												<button type='button' onclick=\"window.location.href='index.php?page=signinup';\">Sign in </button>";
 								}
 
 								if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
