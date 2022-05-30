@@ -10,12 +10,18 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
     padding: 2rem;    
+}
+.name{
+    font-size: 32px;
 }
 nav ul li{
     display: inline-block;
     list-style-type: none;
     padding: 0 2rem;
+    font-size: 20px;
 }
 nav ul li a{
     text-decoration: none;
@@ -26,6 +32,8 @@ nav ul li a:hover{
 }
 .container button{
     border: none;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 2px;
     color: white;
     background-color: black;
     border-radius: 30px;
@@ -62,6 +70,8 @@ nav label{
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
 }
 .tagline{
     display: block;
@@ -86,19 +96,38 @@ nav label{
 }
 .ongoing{
     background-color: #fefefe;
+    font-family: 'Bebas Neue', cursive;
 }
 .title{
     text-align: center;
     text-transform: capitalize;
     padding: 3rem 0 1rem 0;
+    font-size: 32px;
+    font-weight: 100;
+    letter-spacing: 5px;
 }
-.container{
+.big-title{
+    text-align: center;
+    text-transform: capitalize;
+    padding: 3rem 0 0 0;
+    font-size: 48px;
+    font-weight: 100;
+    letter-spacing: 6px;
+    font-family: 'Bebas Neue', cursive;
+    color: #FF7D33;
+}
+.tournaments, .matchs{
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    padding: 0 0 3rem 0;
 }
-.container a{
+.tournaments a, .matchs a{
     padding: 2rem 10rem;
     cursor: crosshair;
+    text-decoration: none;
+}
+.all a{
     text-decoration: none;
 }
 .tournament{
@@ -116,16 +145,328 @@ nav label{
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #FF7D33;
+    font-family: 'Yaldevi', sans-serif;
 }
-.name, .end{
+.name-, .end, .team-one, .team-two, .score{
     text-transform: capitalize;
     color: black;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-family: 'Yaldevi', sans-serif;
 }
 .descr{
     color: black;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-family: 'Yaldevi', sans-serif;
+}
+.sep{
+    min-height: 30vh;
+    background: url('assets/cup.jpg') center/cover no-repeat fixed;
+}
+.contact{
+    background: white;
+    padding: 0 3rem 3rem 3rem;
+    font-family: 'Bebas Neue', cursive;
+}
+.areas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 3rem;
+    align-items: center;
+}
+.areas form{
+    padding: 0 3rem 0 0;
+    text-align: center;
+}
+.areas p{
+    padding: 0 0 0 3rem;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Yaldevi', sans-serif;
+}
+.email, .objet, .content, .mail, .submit{
+    background: white;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    width: 75%;
+    border: 2px solid gray;
+    padding: 1rem;
+    outline: 0;
+    color: gray;
+}
+footer{
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 100;
+    letter-spacing: 3px;
+    font-size: 16px;
+}
+.ending{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 0 2rem 0;
+    color: white;
+}
+.legallinks{
+    padding: 0 3rem;
+    text-align: center;
+    align-content: center;
+}
+.legallinks a{
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 5px;
+}
+.sociallinks{
+    text-align: center;
+    align-content: center;
+}
+.sociallinks a{
+    display: inline-block;
+    padding: 0 1rem;
+    width: 7%;
+    height: 7%;
+}
+.sociallinks img{
+    width: 100%;
+    display: block;
+}
+.contactlinks{
+    padding: 0 3rem;
+    font-size: 0.9rem;
+    text-align: center;
+    align-content: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    vertical-align: middle;
+}
+.connect{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 0 1rem 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: solid 5px #FBAB7E;
+    border-radius: 30px;
+}
+.login, .signin{
+    padding: 2rem;
+}
+.login h2, .signin h2{
+    padding: 1rem 0;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
+    font-weight: 100;
+    font-size: 32px;
+}
+.id, .pswd{
+    background: white;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    border: 2px solid gray;
+    padding: 1rem;
+    outline: 0;
+    color: gray;
+}
+.vignette{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5rem 0;
+    justify-content: space-around;
+}
+.card{
+    padding: 3rem 5rem 0 5rem;
+    border: solid 5px #FBAB7E;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 15px 15px black;
+    transition: transform .4s;
+}
+.card:hover{
+    transform: scale(1.1);
+}
+.card span{
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
+    font-weight: 100;
+    font-size: 32px;
+    color: black;
+}
+.card .link{
+    padding: 3rem;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: black;
+}
+.card .link a{
+    text-decoration: none;
+    color: black;
+}
+.card .link a:hover{
+    color: #FBAB7E;
+}
+.displayer{
+    font-family: 'Bebas Neue', cursive;
+}
+.all{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-decoration: none;
+    row-gap: 2rem; column-gap: 2rem;
+    padding: 3rem;
+}
+.team{
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
+    padding: 2rem 3rem;
+    border: solid 5px #FBAB7E;
+    border-radius: 30px;
+    box-shadow: 10px 10px black;
+}
+.match{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: 'Bebas Neue', cursive;
+    padding: 2rem 5rem;
+    border-radius: 30px;
+    background: #fbfbfb;
+    box-shadow:  20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    color: black;
+}
+.team-played{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 0;
+}
+.score{
+    padding: 0 1rem;
+    color: #FF7D33;
+    font-size: 20px;
+    font-family: 'Yaldevi', sans-serif;
+}
+.formform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formform span{
+    text-transform: capitalize;
+    font-family: 'Yaldevi', sans-serif;
+    font-size: 32px;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+.formform input, .formform select, .formform textarea, .add{
+    padding: 1rem;
+    border-radius: 20px;
+    border-color: gray;
+    background-color: white;
+}
+.name-c, .descript, .date, .playground{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 1rem 0;
+}
+#submit, .add{
+    color: gray;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.prez{
+    border-collapse: collapse;
+    width: 100%;
+    padding: 3rem 0;
+}
+.prez td, .prez th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.prez td a{
+    color: black;
+    cursor: grab;
+}
+.prez tr:nth-child(even){background-color: #f2f2f2;}
+.prez tr:hover {background-color: #ddd;}
+.prez th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FBAB7E;
+    color: white;
 }
 
 @media screen and (max-width: 1000px){
+    .card{
+        padding: 2rem 1rem 1rem 1rem;
+        box-shadow: 0 10px black;
+    }
+    .card:hover{
+        transform: none;
+    }
+    .card .link{
+        padding: 1rem;
+    }
+    .vignette{
+        display: block;
+        padding: 5rem 3rem;
+    }
+    .connect{
+        display: block;
+    }
+    .legallinks, .sociallinks{
+        padding: 0 2rem 2rem 2rem;
+    }
+    .contactlinks{
+        padding: 0 2rem;
+    }
+    .ending{
+        display: inline-block;
+        padding: 1rem 0;
+    }
+    .contact{
+        padding: 0 2rem 2rem 2rem;
+        text-align: center;
+    }
+    .areas{
+        display: inline-block;
+        padding: 1rem;
+    }
+    .areas p{
+        display: none;
+    }
+    .areas form{
+        padding: 0;
+    }
+    .title{
+        font-size: 6vw;
+    }
+    .tournaments a{
+        padding: 1rem 2rem;
+    }
+    .tournament{
+        flex-direction: column;
+    }
+    .title-cat{
+        padding: 0.5rem 0;
+        font-size: 4vw;
+    }
+    .name-, .end, .descr{
+        font-size: 3vw;
+    }
     .tagline button {   
         padding: 2vw 4vw;
         font-size: 4vw;

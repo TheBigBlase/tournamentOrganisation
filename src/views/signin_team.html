@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Yaldevi:wght@300&display=swap" rel="stylesheet"> 
+        <title>Sigma Tournament</title>
+    </head>
+    <body>
+        <!--HEADER-->
+        <header>
+            <!--NAVBAR-->
+            <nav>
+                <h1 class="name">Sigma Tournament</h1>
+                <input type='checkbox' id='toggle'>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tournament.html">Tournaments</a></li>
+                    <li><a href="team.html">Teams</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="container">
+                    <button type="button" onclick="window.location.href='logsignin.html';">Sign In / Sign Up</button>
+                </div>
+                <label for="toggle"><span class="bars"></span></label>
+            </nav>
+        </header>
+        
+        <!--BIG TITLE-->
+        <h1 class="big-title">Register Your Team</h1><br><br>
+
+        <!--FORM-->
+        <section class="form">
+            <table class="prez">
+                <thead>
+                    <tr>
+                        <th>Tournament Name</th>
+                        <th>Tournament Description</th>
+                        <th>End inscription date</th>
+                        <th>Register</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NewTournament</td>
+                        <td>Ma super description de la mort qui tue</td>
+                        <td>2022-07-14</td>
+                        <td><a href="index.php?page=inscription&amp;competid=9&amp;competName=NewTournament&amp;endInscription=2022-07-14"> Register </a></td>
+                    </tr>
+                    <tr>
+                        <td>CompetX</td>
+                        <td>Super Description</td>
+                        <td>2022-06-03</td>
+                        <td><a href="index.php?page=inscription&amp;competid=8&amp;competName=CompetX&amp;endInscription=2022-06-03"> Register </a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="" method="post" class="formform">
+                <div class="descript">
+                    <span>Current Team :</span><br>
+                    <textarea name="team" id="description"></textarea>
+                </div>
+                <div class="descript">
+                    <span>Tournament :</span><br>
+                    <textarea name="tournament" id="description"></textarea>
+                </div>
+                <input id="submit" type="submit" value="Add">
+            </form>
+        </section>
+
+        <!--SEPARATION-->
+        <br><br>
+        <section class="sep"></section>
+
+        <!--FOOTER-->
+        <footer>
+            <div class="ending">
+                <div class="legallinks">
+                    <a href="">Mentions Légales</a><br>
+                    <a href="">C.G.U</a><br>
+                    <a href="">Contact</a><br>
+                    <a href="">About Us</a><br>
+                </div>
+                <div class="sociallinks">
+                    <a href=""><img src="assets/fb.png"></a>
+                    <a href=""><img src="assets/ig.png"></a>
+                    <a href=""><img src="assets/yt.png"></a>
+                </div>
+                <div class="contactlinks">
+                    <p>SIGMA TEAM</p>
+                    <p>Polytech Annecy</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
