@@ -344,6 +344,7 @@ footer{
 }
 .match{
     display: flex;
+    font-size: 20px;
     flex-direction: column;
     justify-content: space-around;
     font-family: 'Bebas Neue', cursive;
