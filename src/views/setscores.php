@@ -50,7 +50,7 @@ if(isset($_POST["submitbutton"])){
         $conn->commit();
         $conn->autocommit(TRUE);
 
-        echo "Score successfully uploaded for match ".$team1["teamName"]." vs ".$team2["teamName"];
+        echo "<div class='success'>Score successfully uploaded for match ".$team1["teamName"]." vs ".$team2["teamName"]. "</div>";
     }
 
 }
@@ -65,24 +65,26 @@ foreach ($matches as $match){
     $team2 = getTeam($conn, $match["teamId2"]);
 
     ?>
-<div>
-    For the match : <?php echo $team1["teamName"]." vs ".$team2["teamName"] ?>
-
-    <form action="index.php?page=setscores&compet=<?php echo $competId ?>" method="post">
+    <h1 class="title">For the match : <?php echo $team1["teamName"]." vs ".$team2["teamName"] ?> </h1>
+<section class="form">
+    <form class="formform" action="index.php?page=setscores&compet=<?php echo $competId ?>" method="post">
         <input type="hidden" name="teamId1" value="<?php echo $team1["teamId"]; ?>">
         <input type="hidden" name="teamId2" value="<?php echo $team2["teamId"]; ?>">
-        <p>
+        <div class="descript">
             <label for="score1">Score <?php echo $team1["teamName"]; ?></label>
             <input type="number" name="score1" id="score1" value="<?php echo $match["score1"]?>">
-        </p>
-        <p>
+        </div>
+        <div class="descript">
             <label for="score2">Score <?php echo $team2["teamName"]; ?></label>
             <input type="number" name="score2" id="score2" value="<?php echo $match["score2"]?>">
-        </p>
-        <input type="submit" name="submitbutton" value="Upload Scores">
+        </div>
+        <input id="submit" type="submit" name="submitbutton" value="Upload Scores">
     </form>
-</div>
-<?php
+</section>
+<!--SEPARATION-->
+<br><br>
+<section class="sep"></section>
+    <?php
 }
 ?>
 

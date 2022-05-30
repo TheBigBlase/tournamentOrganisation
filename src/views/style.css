@@ -117,6 +117,13 @@ nav label{
     font-family: 'Bebas Neue', cursive;
     color: #FF7D33;
 }
+.success{
+    color: limegreen;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    padding-top: 10px ;
+}
 .tournaments, .matchs{
     display: flex;
     flex-direction: column;
