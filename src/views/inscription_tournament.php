@@ -1,6 +1,14 @@
 <?php
 /** @var $conn mysqli */
 
+include "../controller/teamController.php";
+
+
+$userHasTeam = false;
+if(isset($_SESSION["ID"])){
+    $userHasTeam = playerHasTeam($conn, $_SESSION["ID"]);
+}
+
 $sql = "
 SELECT * 
 FROM `competition` 
@@ -22,7 +30,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
                 <th>Tournament Description</th>
                 <th>End inscription date</th>
                 <?php
-                if(isset($_SESSION['ID'])) { // todo : fiw that : is shouldn't display if the use has no team
+                if(isset($_SESSION['ID']) && $userHasTeam) {
                     echo "<th>Register</th>";
                 }
                 ?>
@@ -39,7 +47,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
             echo "<td>" .  $competName  . "</td>";
             echo "<td>" .  $description  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
-            if(isset($_SESSION['ID'])) { // todo : fix that : it shouldn't display if we have to team
+            if(isset($_SESSION['ID']) && $userHasTeam) {
                 echo "<td><a href='index.php?page=inscription&competid=$competid&competName=$competName&endInscription=$endInscription'>Register</a></td>";
             }
             echo "</a></tr>";
