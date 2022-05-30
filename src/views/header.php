@@ -31,13 +31,14 @@ include('../database/connexion_db.php');
 								<?php
 								if(isset($_SESSION["name"])){
 									echo "
-										<div class=\"container\">
-                    <button type='button' onclick='window.location.href='logsignin.html';'>".$_SESSION["name"]." Logout </button>
+										<div class=\"container\">"
+										. $_SESSION["name"] ."
+                    <button type='button' onclick=\"window.location.href='index.php?out=out';\"> Logout </button>
 										</div>
 												";
 								}else{
 										echo "
-												<button type='button' onclick=\"window.location.href='index.php?out=out';\">Sign in </button>";
+												<button type='button' onclick=\"window.location.href='signinup.php';\">Sign in </button>";
 								}
 
 								if(empty($_SESSION["team"]) && !empty($_SESSION["ID"])){
