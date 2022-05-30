@@ -46,9 +46,8 @@ else{
 }
 ?>
 </main>
-
-<footer>
-    &copy; Polytech 2021 - 2022
-</footer>
+<?php
+include("footer.html");
+?>
 </body>
 </html>
