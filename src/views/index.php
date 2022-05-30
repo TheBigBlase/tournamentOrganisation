@@ -10,6 +10,10 @@ if(isset($_GET["page"])){
         case "signinup":
             include "signinup.php";
             break;
+				case "signin_team":
+						include "signin_team.html";
+						include "contact.html";
+						break;
 				case "teams":
 						include "team.html";
 						include "contact.html";
