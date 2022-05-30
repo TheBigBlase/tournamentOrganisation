@@ -67,3 +67,20 @@ function getTeamsInCompetition($conn, $competId){
     }
     return $teams;
 }
+
+/**
+ * @param $conn mysqli
+ * @param $userId int
+ * @return bool
+ */
+function playerHasTeam($conn, $userId){
+    $userRequest = $conn->prepare("
+        SELECT * from USER_TEAM 
+        where userId = ? 
+    ");
+    $userRequest->bind_param("i", $userId);
+    $userRequest->execute();
+    $res = $userRequest->get_result();
+    $result = $res->fetch_assoc();
+    return !is_null($result);
+}

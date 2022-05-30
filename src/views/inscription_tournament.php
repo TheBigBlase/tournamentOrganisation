@@ -1,6 +1,14 @@
 <?php
 /** @var $conn mysqli */
 
+include "../controller/teamController.php";
+
+
+$userHasTeam = false;
+if(isset($_SESSION["ID"])){
+    $userHasTeam = playerHasTeam($conn, $_SESSION["ID"]);
+}
+
 $sql = "
 SELECT * 
 FROM `competition` 
@@ -11,23 +19,24 @@ ORDER BY endInscription DESC
 
 $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
 ?>
+<!--BIG TITLE-->
+<h1 class="big-title"> Register Your Team </h1>
 
-<div>
-    <table>
-        <caption>Inscription tournaments</caption>
+<section class="form">
+    <table class="prez">
         <thead>
-        <tr>
-            <th>Tournament Name</th>
-            <th>Tournament Description</th>
-            <th>End inscription date</th>
-            <?php
-            if(isset($_SESSION['ID'])) {
-                echo "<th>Register</th>";
-            }
-            ?>
-        </tr>
+            <tr>
+                <th>Tournament Name</th>
+                <th>Tournament Description</th>
+                <th>End inscription date</th>
+                <?php
+                if(isset($_SESSION['ID']) && $userHasTeam) {
+                    echo "<th>Register</th>";
+                }
+                ?>
+            </tr>
         </thead>
-        <tbody style=" ">
+        <tbody>
         <?php
         while ($row = mysqli_fetch_assoc($result)) {
             $competid = $row['competId'];
@@ -38,15 +47,15 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
             echo "<td>" .  $competName  . "</td>";
             echo "<td>" .  $description  . "</td>";
             echo "<td>" .  $endInscription  . "</td>";
-            if(isset($_SESSION['ID'])) {
-                echo "<td><a href='index.php?page=inscription&competid=$competid&competName=$competName&endInscription=$endInscription'> Register </a></td>";
+            if(isset($_SESSION['ID']) && $userHasTeam) {
+                echo "<td><a href='index.php?page=inscription&competid=$competid&competName=$competName&endInscription=$endInscription'>Register</a></td>";
             }
             echo "</a></tr>";
         }
         ?>
         </tbody>
     </table>
-</div>
+</section>
 <br>
 
 <?php
@@ -68,16 +77,17 @@ if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     echo "
     <div>
         <h1>Register form</h1>
-        <form ACTION='index.php?page=inscription&form=form&team_id=$teamId&compet_id=$competid' METHOD='post'>
-            <label>
-                Your current team :
-                <input type='text' value='$teamName' disabled>
-            </label>
-            <label>
-                The tournament you selected :
-                <input type='text' value='$competName' disabled>
-            </label>
-            <input type='submit' value='Send'>
+        <form class='formform' action='index.php?page=inscription&form=form&team_id=$teamId&compet_id=$competid' method='post'>
+            <div class='descript'>
+                <label for='team'>Your current team :</label>
+                <input type='text' name='team' value='$teamName' disabled>
+            </div>
+            <div class='descript'>
+                <label for='competName'>The tournament you selected :</label>
+                <input type='text' name='competName' value='$competName' disabled>
+            </div>
+            
+            <input id='submit' type='submit' value='Add'>
         </form>
     </div>
     ";
