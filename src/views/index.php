@@ -1,13 +1,5 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tournaments</title>
-</head>
-<body>
 <?php
 include "header.php";
 ?>
@@ -37,12 +29,12 @@ if(isset($_GET["page"])){
             include "create_competition.php";
             break;
         default :
-            include "welcome.php";
+            include "index.html";
             break;
     }
 }
 else{
-    include "welcome.php";
+    include "index.html";
 }
 ?>
 </main>
