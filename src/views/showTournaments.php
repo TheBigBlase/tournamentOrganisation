@@ -48,9 +48,9 @@ if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
 
 							echo "<a href='index.php?page=competition&compet_id=$competid'\">";
 								echo "<div class='tournament'>";
-                echo "<span class='name-'><p class='title-cat'>name</p><h1>Chess Tournament</h1></span>";
-                echo "<span class='descr'><p class='title-cat'>description</p><h1>Chess Tournament. MIN ELO : 1800</h1></span>";
-                echo "<span class='end'><p class='title-cat'>end</p><h1>Sam 18 May.</h1></span>";
+                echo "<span class='name-'><p class='title-cat'>name</p><h1>$competName</h1></span>";
+                echo "<span class='descr'><p class='title-cat'>description</p><h1>$description</h1></span>";
+                echo "<span class='end'><p class='title-cat'>end inscription</p><h1>$endInscription</h1></span>";
 								echo "</div>";
 							echo "</a>";
 					}
