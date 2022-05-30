@@ -18,7 +18,7 @@ include('../database/connexion_db.php');
         <header>
             <!--NAVBAR-->
             <nav>
-                <h1 class="name">Sigma Tournament</h1>
+                <h1 class="name"><a href=index.php" style="text-decoration:none; color:black">Sigma Tournament</a></h1>
                 <input type='checkbox' id='toggle'>
                 <ul>
                     <li><a href="index.html">Home</a></li>
