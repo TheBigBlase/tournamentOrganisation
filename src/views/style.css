@@ -14,6 +14,9 @@ nav{
     letter-spacing: 3px;
     padding: 2rem;    
 }
+body{
+    font-family: 'Yaldevi', sans-serif;
+}
 .name{
     font-size: 32px;
 }
@@ -260,24 +263,39 @@ footer{
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 0 1rem 0;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
     background: white;
     border: solid 5px #FBAB7E;
     border-radius: 30px;
+    /*AJOUTS*/
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
 }
-.login, .signin{
+.login, .signup{
     padding: 2rem;
 }
-.login h2, .signin h2{
+.login div{
+    padding: 5px;
+}
+.login h2, .signup h2{
     padding: 1rem 0;
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 3px;
     font-weight: 100;
     font-size: 32px;
 }
+
+.signup div{
+    padding: 5px;
+}
+
 .id, .pswd{
     background: white;
     border-radius: 5rem;
@@ -386,6 +404,12 @@ footer{
     border-radius: 20px;
     border-color: gray;
     background-color: white;
+}
+.error{
+    color: red;
+    font-family: 'Yaldevi', sans-serif;
+    text-align: center;
+    padding: 5px;
 }
 .coollink{
     font-family: 'Yaldevi', sans-serif;
