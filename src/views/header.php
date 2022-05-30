@@ -30,9 +30,9 @@ include('../database/connexion_db.php');
                 <h1 class="name"><a href="index.php" style="text-decoration:none; color:black">Sigma Tournament</a></h1>
                 <input type='checkbox' id='toggle'>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="index.php?page=showTournaments">Tournaments</a></li>
-                    <li><a href="team.html">Teams</a></li>
+                    <li><a href="index.php?page=teams">Teams</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="container">

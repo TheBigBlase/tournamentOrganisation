@@ -181,7 +181,6 @@ nav label{
     font-family: 'Bebas Neue', cursive;
 }
 .areas{
-    display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 3rem;
     align-items: center;
