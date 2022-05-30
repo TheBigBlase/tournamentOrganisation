@@ -1,4 +1,3 @@
-<section>
     <?php
     /** @var $conn mysqli */
     include('../database/connexion_db.php');
@@ -58,13 +57,18 @@
     $user_req = "SELECT * from user";
     $users = mysqli_query($conn, $user_req) or die("Requête invalide: ". mysqli_error($conn)."\n".$user_req);
     ?>
-    <h1>Create you own team</h1>
-    <form action="index.php?page=create_team" method="post">
-        <p>
+<!--BIG TITLE-->
+
+    <h1 class="big-title">Create you own team</h1>
+
+<!--FORM-->
+<section class="formform">
+    <form action="index.php?page=create_team" method="post" class="formform">
+        <div class="name-c">
             <label for="name">Name</label>
             <input type="text" name="name" id="name">
-        </p>
-        <div id="users">
+        </div>
+        <div id="users" class="playground">
             <label for="users">People in your teams</label>
             <select name="users" id="users">
                 <?php
@@ -75,7 +79,7 @@
                 }
                 ?>
             </select>
-            <button type="button" onclick="addUser()" >Add</button>
+            <button class="add" type="button" onclick="addUser()" >Add</button>
             <h3>Users in team : </h3>
             <p>
                 <label> <?php echo $_SESSION["name"]?> </label>
@@ -83,59 +87,59 @@
             </p>
         </div>
 
-
         <p>
             <input type="submit" value="Create" name="createTeamForm">
         </p>
     </form>
-    <script>
-        function addUser() {
+</section>
+
+<script>
+    function addUser() {
+        let usersTag = document.querySelector("#users");
+        let selectTag = usersTag.querySelector("select");
+
+        let valueSelected = selectTag.options[selectTag.selectedIndex].value
+
+        let p = document.createElement("p");
+
+        let label = document.createElement("label");
+        label.innerText = selectTag.options[selectTag.selectedIndex].innerText;
+
+        let newChild = document.createElement("input");
+        newChild.value = valueSelected;
+        newChild.id = valueSelected + "";
+        newChild.name = "plr" + valueSelected;
+        newChild.hidden = true;
+
+        let deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.innerText = " Delete ";
+        deleteButton.id;
+        deleteButton.onclick = (e) => {
+            let parent = e.target.parentNode;
+            let input = parent.querySelector("input");
+            let label = parent.querySelector("label");
+
+            let newOption = document.createElement("option");
+            newOption.value = input.value;
+            newOption.innerText = label.innerText;
+
             let usersTag = document.querySelector("#users");
             let selectTag = usersTag.querySelector("select");
 
-            let valueSelected = selectTag.options[selectTag.selectedIndex].value
+            selectTag.add(newOption)
 
-            let p = document.createElement("p");
-
-            let label = document.createElement("label");
-            label.innerText = selectTag.options[selectTag.selectedIndex].innerText;
-
-            let newChild = document.createElement("input");
-            newChild.value = valueSelected;
-            newChild.id = valueSelected + "";
-            newChild.name = "plr" + valueSelected;
-            newChild.hidden = true;
-
-            let deleteButton = document.createElement("button");
-            deleteButton.type = "button";
-            deleteButton.innerText = " Delete ";
-            deleteButton.id;
-            deleteButton.onclick = (e) => {
-                let parent = e.target.parentNode;
-                let input = parent.querySelector("input");
-                let label = parent.querySelector("label");
-
-                let newOption = document.createElement("option");
-                newOption.value = input.value;
-                newOption.innerText = label.innerText;
-
-                let usersTag = document.querySelector("#users");
-                let selectTag = usersTag.querySelector("select");
-
-                selectTag.add(newOption)
-
-                e.target.parentNode.remove();
-            }
-
-            let selectedOption = document.querySelector("option[value='"+valueSelected+"']");
-            console.log(selectedOption);
-            selectedOption.remove();
-
-            p.appendChild(label);
-            p.appendChild(newChild);
-            p.appendChild(deleteButton);
-
-            usersTag.appendChild(p);
+            e.target.parentNode.remove();
         }
-    </script>
-</section>
+
+        let selectedOption = document.querySelector("option[value='"+valueSelected+"']");
+        console.log(selectedOption);
+        selectedOption.remove();
+
+        p.appendChild(label);
+        p.appendChild(newChild);
+        p.appendChild(deleteButton);
+
+        usersTag.appendChild(p);
+    }
+</script>
