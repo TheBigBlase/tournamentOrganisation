@@ -99,6 +99,7 @@ nav label{
     font-family: 'Bebas Neue', cursive;
 }
 .title{
+    font-family: 'Bebas Neue', cursive;
     text-align: center;
     text-transform: capitalize;
     padding: 3rem 0 1rem 0;
@@ -202,8 +203,7 @@ footer{
     font-weight: 100;
     letter-spacing: 3px;
     font-size: 16px;
-		position:absolute;
-		bottom:0;
+    bottom:0;
 }
 .ending{
     display: grid;
@@ -370,11 +370,22 @@ footer{
     font-weight: 100;
     letter-spacing: 5px;
 }
-.formform input, .formform select, .formform textarea, .add{
+.formform input, .formform select, .formform textarea, .add, .coollink{
     padding: 1rem;
     border-radius: 20px;
     border-color: gray;
     background-color: white;
+}
+.coollink{
+    font-family: 'Yaldevi', sans-serif;
+    padding: 1rem;
+    border-radius: 20px;
+    border: 1px solid gray;
+    background-color: white;
+    text-decoration: none;
+    color: gray;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 .name-c, .descript, .date, .playground{
     display: flex;

@@ -20,7 +20,8 @@ function searchIdInArray($id, $teams){
     return false;
 }
 
-echo "<p><h3>".$competition["competName"]."</h3><br>
+//BIG TITLE
+echo "<h1 class='big-title'>".$competition["competName"]."</h1><br><p class='title'>
         ".$competition["description"]."</p>
         ";
 
@@ -29,24 +30,32 @@ echo "<p><h3>".$competition["competName"]."</h3><br>
 if(competHasFinished($conn, $competId)){
     $winner = getCompetitionWinner($conn, $competId);
     echo "
-        <p>The winner of this competition is : ".$winner["teamName"] ."</p>
+        <p class='title'>The winner of this competition is : ".$winner["teamName"] ."</p>
     ";
 }
 else {
     echo "<p>This competition is still ongoing</p>";
 }
+
+// TEAMS
 // Here, we get all the teams in the competition
 
 $teams = getTeamsInCompetition($conn, $competId);
-
+echo "<section class='displayer'>
+        <h1 class='title'>ALL TEAMS</h1>
+        <div class='all'>";
 foreach ($teams as $team){
-    echo "<div class='team'> ".$team["teamName"]." </div>";
+    echo "<span class='team'> ".$team["teamName"]." </span>";
 }
+echo "</div></section>";
 
+// MATCHES
 // Here, we display all the matches with their scores
 
 $tables = getTablesForCompet($conn,  $competId);
-
+echo "<section class='displayer'>
+        <h1 class='title'>ALL TEAMS</h1>
+        <div class='all'>";
 foreach ($tables as $table){
     $matches = getMatchesFromTable($conn, $table["tableId"]);
 
@@ -70,7 +79,13 @@ foreach ($tables as $table){
         <?php
     }
 }
+echo "</div>";
+echo "</section>";
 
+echo "<div class='all'>";
 if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
-    echo "<a href='index.php?page=setscores&compet=$competId'>Set scores</a>";
+    echo "<a href='index.php?page=setscores&compet=$competId' class='coollink'>Set scores</a>";
 }
+echo "</div>";
+
+
