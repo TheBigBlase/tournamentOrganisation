@@ -31,7 +31,7 @@ include('../database/connexion_db.php');
                 <input type='checkbox' id='toggle'>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="tournament.html">Tournaments</a></li>
+                    <li><a href="index.php?page=showTournaments">Tournaments</a></li>
                     <li><a href="team.html">Teams</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>

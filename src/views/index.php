@@ -10,6 +10,11 @@ if(isset($_GET["page"])){
         case "signinup":
             include "signinup.php";
             break;
+				case "showTournaments":
+						include "tournament.html";
+						include "showTournaments.php";
+						include "contact.html";
+						break;
         case "competition":
             include "tournament_vue.php";
             break;
@@ -30,11 +35,15 @@ if(isset($_GET["page"])){
             break;
         default :
             include "index.html";
+						include "showTournaments.php";
+						include "contact.html";
             break;
     }
 }
 else{
     include "index.html";
+		include "showTournaments.php";
+		include "contact.html";
 }
 ?>
 </main>
