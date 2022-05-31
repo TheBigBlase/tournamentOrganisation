@@ -138,6 +138,9 @@ nav label{
     cursor: crosshair;
     text-decoration: none;
 }
+.winner {
+    color: #FF7D33;
+}
 .all a{
     text-decoration: none;
 }

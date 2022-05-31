@@ -16,21 +16,6 @@ $resultSqlTournamentVue = mysqli_query($conn, $sqlTournamentVue) or die("Requêt
 ?>
 
 
-<!-- creation tournament redirect -->
-<?php
-if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
-    ?>
-    <div>
-        <a href="index.php?page=create_competition"> Creation tournament </a>
-    </div>
-<?php
-}
-
-
-?>
-<!-- inscription tournament redirect -->
-
-
 
 
 

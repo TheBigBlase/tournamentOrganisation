@@ -90,5 +90,5 @@ foreach ($matches as $match){
 
 <form action="index.php?page=generate_matches" method="post">
     <input type="hidden" name="compet" value="<?php echo $competId ?>">
-    <input type="submit" value="Generate next matches">
+    <input class="coollink" type="submit" value="Generate next matches">
 </form>

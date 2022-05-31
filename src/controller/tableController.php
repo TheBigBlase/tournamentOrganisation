@@ -18,7 +18,7 @@ function createTable($conn, $competId, $roundNumber){
         $lastId = $conn->insert_id;
     else{
         // If an error is thrown, it means that the round has already been created
-
+        var_dump($conn->error);
         $lastRoundRequest = $conn->prepare("
             SELECT  t.tableId
             FROM `table` t

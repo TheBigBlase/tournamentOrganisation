@@ -3,6 +3,7 @@
 <?php
 include "header.php";
 ?>
+<body>
 <main>
 <?php
 if(isset($_GET["page"])){
@@ -10,19 +11,15 @@ if(isset($_GET["page"])){
         case "signinup":
             include "signinup.php";
             break;
-				case "signin_team":
-						include "signin_team.html";
-						include "contact.html";
-						break;
-				case "teams":
-						include "team.html";
-						include "contact.html";
-						break;
-				case "showTournaments":
-						include "tournament.html";
-						include "showTournaments.php";
-						include "contact.html";
-						break;
+        case "teams":
+            include "team.html";
+            include "contact.html";
+            break;
+        case "showTournaments":
+            include "tournament.html";
+            include "showTournaments.php";
+            include "contact.html";
+            break;
         case "competition":
             include "tournament_vue.php";
             break;
@@ -40,18 +37,19 @@ if(isset($_GET["page"])){
             break;
         case "create_competition":
             include "create_competition.php";
+            include "contact.html";
             break;
         default :
             include "index.html";
-						include "showTournaments.php";
-						include "contact.html";
+            include "showTournaments.php";
+            include "contact.html";
             break;
     }
 }
 else{
     include "index.html";
-		include "showTournaments.php";
-		include "contact.html";
+    include "showTournaments.php";
+    include "contact.html";
 }
 ?>
 </main>

@@ -1,5 +1,8 @@
+<!--<h1 class="big-title"> Generate new matches</h1>-->
+
 <?php
 /** @var $conn mysqli */
+
 
 include "../controller/tableController.php";
 include "../controller/teamController.php";
@@ -107,7 +110,7 @@ else{
 
     if (empty($winnersIds))
         die("<p> Previous matches are not over</p>");
-
+    var_dump($roundNumber);
     $tableId = createTable($conn, $competId, $roundNumber);
     registerTeamsForRound($conn, $winnersIds, $tableId);
 
@@ -121,6 +124,8 @@ else{
             <a href='index.php?page=competition&compet_id=$competId'>Go back to the tournament</a>
         ";
 
+        $conn->commit();
+        $conn->autocommit(TRUE);
         return;
     }
 

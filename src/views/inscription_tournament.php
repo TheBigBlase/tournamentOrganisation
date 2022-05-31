@@ -63,7 +63,7 @@ $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error(
 if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $id =  $_SESSION['ID'];
 
-    $sql = "SELECT * from team where teamId = (select teamId from USER_TEAM where userId = $id);";
+    $sql = "SELECT * from team where teamId in (select teamId from USER_TEAM where userId = $id);";
     $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
     $row = mysqli_fetch_assoc($result);
     if($teamName = $row['teamName'] == null){
@@ -76,7 +76,7 @@ if(isset($_GET["competid"], $_GET["competName"],$_SESSION['ID'])){
     $teamId = $row['teamId'];
     echo "
     <div>
-        <h1>Register form</h1>
+        <h1 class='title'>Register form</h1>
         <form class='formform' action='index.php?page=inscription&form=form&team_id=$teamId&compet_id=$competid' method='post'>
             <div class='descript'>
                 <label for='team'>Your current team :</label>
@@ -100,7 +100,7 @@ if(isset($_GET['error'])){
 }else{
     if(isset($_GET['compet_id'])){
         $id =  $_SESSION['ID'];
-        $sql = "SELECT * from team where teamId = (select teamId from USER_TEAM where userId = $id);";
+        $sql = "SELECT * from team where teamId in (select teamId from USER_TEAM where userId = $id);";
         $result = mysqli_query($conn, $sql) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sql);
         $row = mysqli_fetch_assoc($result);
 
@@ -121,7 +121,7 @@ if(isset($_GET['error'])){
             $sqlInsert_teamCompet = "INSERT INTO `TEAM_COMPET` (`teamId`, `competId`) VALUES ($team_Id, $compet_id );";
             $result = mysqli_query($conn, $sqlInsert_teamCompet) or die("Requête invalide: " . mysqli_error($conn) . "\n" . $sqlInsert_teamCompet);
         }
-        echo 'The form is send successfully, your team are now registered';
+        echo 'The form is send successfully, your team is now registered';
     }
 }
     if(isset($_GET['error_tournament'])){

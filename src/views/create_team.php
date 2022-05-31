@@ -25,12 +25,11 @@
             $req = "INSERT INTO team (teamName) VALUES ('".$name."')";
 
             if($conn->query($req) === true){
-                echo("<h3 style='color: green'> Team created successfully  </h3>");
+                echo("<h3 class='success'> Team created successfully  </h3>");
             }
 
             else{
-                echo("<p> Error, can't create this team </p>");
-                var_dump($conn->error);
+                echo("<p class='error'> Error, can't create this team </p>");
                 $ok = false;
             }
             $lastId = $conn->insert_id;
@@ -38,10 +37,8 @@
                 if(substr($key, 0, 3) == "plr"){
                     $userId = intval(substr($key, 3));
                     $plrreq = "INSERT INTO USER_TEAM (userId, teamId) VALUES ($userId, $lastId)";
-                    echo $plrreq;
                     if($conn->query($plrreq) !== true){
-                        echo("<p> Error </p>");
-                        var_dump($conn->error);
+                        echo("<p class='error'> Error </p>");
                         $conn->rollback();
                         $ok = false;
                     }

@@ -30,11 +30,11 @@ echo "<h1 class='big-title'>".$competition["competName"]."</h1><br><p class='tit
 if(competHasFinished($conn, $competId)){
     $winner = getCompetitionWinner($conn, $competId);
     echo "
-        <p class='title'>The winner of this competition is : ".$winner["teamName"] ."</p>
+        <p class='title'>The winner of this competition is : <span class='winner'>".$winner["teamName"] ."</span></p>
     ";
 }
 else {
-    echo "<p>This competition is still ongoing</p>";
+    echo "<p class='title'>This competition is still ongoing</p>";
 }
 
 // TEAMS
@@ -54,7 +54,7 @@ echo "</div></section>";
 
 $tables = getTablesForCompet($conn,  $competId);
 echo "<section class='displayer'>
-        <h1 class='title'>ALL TEAMS</h1>
+        <h1 class='title'>ALL MATCHES</h1>
         <div class='all'>";
 foreach ($tables as $table){
     $matches = getMatchesFromTable($conn, $table["tableId"]);
