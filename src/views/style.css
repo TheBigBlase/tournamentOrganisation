@@ -208,17 +208,24 @@ nav label{
     outline: 0;
     color: gray;
 }
-footer{
+
+.big{
     background-color: #FBAB7E;
     background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     font-family: 'Bebas Neue', cursive;
     font-weight: 100;
     letter-spacing: 3px;
     font-size: 16px;
-		position:relative;
-    height : 144px;
-    margin-top : 144px;
-		bottom:0;
+}
+.small{
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 100;
+    letter-spacing: 3px;
+    font-size: 16px;
+    position:absolute;
+    bottom:0;
 }
 .ending{
     display: grid;

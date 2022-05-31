@@ -54,7 +54,13 @@ else{
 ?>
 </main>
 <?php
-include("footer.html");
+if(isset($_GET["page"])){
+    if ($_GET["page"] == "inscription" || $_GET["page"] == "create_team"){
+        include "footer_small.html" ;
+    }
+    else
+        include "footer.html";
+}
 ?>
 </body>
 </html>
