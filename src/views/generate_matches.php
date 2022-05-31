@@ -121,7 +121,7 @@ else{
             <a href='index.php?page=competition&compet_id=$competId'>Go back to the tournament</a>
         ";
 
-        exit();
+        return;
     }
 
     if (count($teamIds) % 2 != 0) {
@@ -150,4 +150,3 @@ foreach ($nextMatches as $nextMatch) {
 }
 
 ?>
-
